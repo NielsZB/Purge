@@ -11,28 +11,26 @@ public class PlayerController : MonoBehaviour
     [System.Serializable]
     struct InputList
     {
-        public string verticalLeft;
-        public string horizontalLeft;
-        public string dodge;
-        public string attack;
-        public string targeting;
-        public string verticalRight;
-        public string horizontalRight;
-
-        public InputList(string _vertical, string _horizontal, string _dodge, string _attack, string _targeting, string _verticalRight, string _horizontalRight)
-        {
-            verticalLeft = _vertical;
-            horizontalLeft = _horizontal;
-            dodge = _dodge;
-            attack = _attack;
-            targeting = _targeting;
-            verticalRight = _verticalRight;
-            horizontalRight = _horizontalRight;
-        }
+        public string HorizontalMovement;
+        public string VerticalMovement;
+        [Space(10)]
+        public string RightHorizontal;
+        public string RightVertical;
+        [Space(10)]
+        public string LeftHandMagic;
+        public string RightHandMagic;
+        [Space(10)]
+        public string Dodge;
+        public string Parry;
+        public string Attack;
+        public string Heal;
+        [Space(10)]
+        public string Targeting;
     }
 
-    [SerializeField] InputList inputs = new InputList("Vertical", "Horizontal", "Dodge", "Attack", "Targeting", "VerticalRight", "HorizontalRight");
+    [SerializeField] InputList inputs;
 
+    [SerializeField] bool showDebug;
     #endregion
 
     #region Private Variables
@@ -57,19 +55,19 @@ public class PlayerController : MonoBehaviour
     {
         if (movementModule.InputIsEnabled)
         {
-            leftStick.Set(Input.GetAxis(inputs.horizontalLeft), Input.GetAxis(inputs.verticalLeft));
+            leftStick.Set(Input.GetAxis(inputs.HorizontalMovement), Input.GetAxis(inputs.VerticalMovement));
             // MOVING
             movementModule.SetInput(leftStick);
 
 
             // DODGING
-            if (Input.GetButtonDown(inputs.dodge))
+            if (Input.GetButtonDown(inputs.Dodge))
             {
                 movementModule.Dodge(leftStick);
             }
 
             // TOGGLE TARGETING
-            if (Input.GetButtonDown(inputs.targeting))
+            if (Input.GetButtonDown(inputs.Targeting))
             {
                 targetingModule.ToggleTargeting();
 
@@ -84,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
             if (targetingModule.IsTargeting)
             {
-                rightStick.Set(Input.GetAxis(inputs.horizontalRight), Input.GetAxis(inputs.verticalRight));
+                rightStick.Set(Input.GetAxis(inputs.RightHorizontal), Input.GetAxis(inputs.RightVertical));
 
                 //SELECT TARGET
                 if (Mathf.Clamp01(rightStick.magnitude) > 0.5f)
