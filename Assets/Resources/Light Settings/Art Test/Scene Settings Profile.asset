@@ -16,15 +16,15 @@ MonoBehaviour:
   m_AdvancedMode: 0
   mode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 3
   toeStrength:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.22
     min: 0
     max: 1
   toeLength:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.324
     min: 0
     max: 1
   shoulderStrength:
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1be1b6c95cd2e41b27903b9270817f, type: 3}
   m_Name: Vignette
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   mode:
     m_OverrideState: 1
@@ -287,16 +287,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f077503be6ae942a1e1245dbd53ea9, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.416
+    m_Value: 0.115
     min: 0
     max: 1
   scatter:
     m_OverrideState: 1
-    m_Value: 0.641
+    m_Value: 0.586
     min: 0
     max: 1
   tint:
@@ -340,18 +340,18 @@ MonoBehaviour:
   m_AdvancedMode: 0
   focusMode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   focusDistance:
     m_OverrideState: 0
     m_Value: 10
     min: 0.1
   nearFocusStart:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
     min: 0
   nearFocusEnd:
     m_OverrideState: 1
-    m_Value: 2.44
+    m_Value: 33.62
     min: 0
   farFocusStart:
     m_OverrideState: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
     max: 200
   blueOutBlueIn:
     m_OverrideState: 1
-    m_Value: 105
+    m_Value: 100
     min: -200
     max: 200
   m_SelectedChannel: 2
