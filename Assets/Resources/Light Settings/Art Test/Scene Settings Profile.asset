@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f086a068d4c5889438831b3ae9afc11c, type: 3}
   m_Name: Tonemapping
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   mode:
     m_OverrideState: 1
@@ -210,7 +210,7 @@ MonoBehaviour:
     m_Value: 0
   exposure:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   multiplier:
     m_OverrideState: 1
     m_Value: 0.5
@@ -234,19 +234,19 @@ MonoBehaviour:
     m_Value: 0
   top:
     m_OverrideState: 1
-    m_Value: {r: 0.10849057, g: 0.19800495, b: 0.4339623, a: 1}
+    m_Value: {r: 0.3842394, g: 0.28751335, b: 0.6698113, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   middle:
     m_OverrideState: 1
-    m_Value: {r: 0.19464225, g: 0.3316676, b: 0.509434, a: 1}
+    m_Value: {r: 0.39404595, g: 0.5477667, b: 0.7264151, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   bottom:
     m_OverrideState: 1
-    m_Value: {r: 0.25164652, g: 0.49268734, b: 0.6132076, a: 1}
+    m_Value: {r: 0.48420256, g: 0.8013996, b: 0.8773585, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
@@ -273,8 +273,7 @@ MonoBehaviour:
   - {fileID: 854319064455516138}
   - {fileID: -9118605010930429767}
   - {fileID: -4821111674514891167}
-  - {fileID: 5865787358098749405}
-  - {fileID: 8677047753827339113}
+  - {fileID: 2542863868034803934}
 --- !u!114 &854319064455516138
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -287,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f077503be6ae942a1e1245dbd53ea9, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
@@ -324,7 +323,7 @@ MonoBehaviour:
   anamorphic:
     m_OverrideState: 1
     m_Value: 1
---- !u!114 &5865787358098749405
+--- !u!114 &2542863868034803934
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,117 +332,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa3b8214f75b354e9ba2caadd022259, type: 3}
-  m_Name: DepthOfField
+  m_Script: {fileID: 11500000, guid: 9008a067f4d626c4d8bc4bc48f04bb89, type: 3}
+  m_Name: AmbientOcclusion
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
-  focusMode:
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.15
+    min: 0
+    max: 4
+  stepCount:
+    m_OverrideState: 1
+    m_Value: 3
+    min: 2
+    max: 32
+  radius:
+    m_OverrideState: 1
+    m_Value: 0.85
+    min: 0.25
+    max: 5
+  fullResolution:
     m_OverrideState: 1
     m_Value: 1
-  focusDistance:
-    m_OverrideState: 0
-    m_Value: 10
-    min: 0.1
-  nearFocusStart:
+  maximumRadiusInPixels:
     m_OverrideState: 1
-    m_Value: 1
-    min: 0
-  nearFocusEnd:
+    m_Value: 41
+    min: 16
+    max: 256
+  directLightingStrength:
     m_OverrideState: 1
-    m_Value: 33.62
+    m_Value: 0
     min: 0
-  farFocusStart:
-    m_OverrideState: 0
-    m_Value: 10
+    max: 1
+  enableRaytracing:
+    m_OverrideState: 1
+    m_Value: 0
+  rayLength:
+    m_OverrideState: 1
+    m_Value: 0.5
     min: 0
-  farFocusEnd:
-    m_OverrideState: 0
-    m_Value: 20
-    min: 0
-  nearSampleCount:
-    m_OverrideState: 0
-    m_Value: 5
-    min: 3
-    max: 8
-  nearMaxBlur:
-    m_OverrideState: 0
+    max: 50
+  enableFilter:
+    m_OverrideState: 1
+    m_Value: 0
+  numSamples:
+    m_OverrideState: 1
     m_Value: 4
-    min: 0
-    max: 8
-  farSampleCount:
-    m_OverrideState: 0
-    m_Value: 7
-    min: 3
-    max: 16
-  farMaxBlur:
-    m_OverrideState: 0
-    m_Value: 8
-    min: 0
-    max: 16
-  highQualityFiltering:
-    m_OverrideState: 0
-    m_Value: 1
-  resolution:
-    m_OverrideState: 0
-    m_Value: 2
---- !u!114 &8677047753827339113
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7649d9368d3a5c4ab8ad01a63e04962, type: 3}
-  m_Name: ChannelMixer
-  m_EditorClassIdentifier: 
-  active: 0
-  m_AdvancedMode: 0
-  redOutRedIn:
+    min: 1
+    max: 64
+  filterRadius:
     m_OverrideState: 1
-    m_Value: 100
-    min: -200
-    max: 200
-  redOutGreenIn:
-    m_OverrideState: 1
-    m_Value: 0
-    min: -200
-    max: 200
-  redOutBlueIn:
-    m_OverrideState: 1
-    m_Value: 0
-    min: -200
-    max: 200
-  greenOutRedIn:
-    m_OverrideState: 1
-    m_Value: 0
-    min: -200
-    max: 200
-  greenOutGreenIn:
-    m_OverrideState: 1
-    m_Value: 100
-    min: -200
-    max: 200
-  greenOutBlueIn:
-    m_OverrideState: 1
-    m_Value: 0
-    min: -200
-    max: 200
-  blueOutRedIn:
-    m_OverrideState: 1
-    m_Value: 0
-    min: -200
-    max: 200
-  blueOutGreenIn:
-    m_OverrideState: 1
-    m_Value: 0
-    min: -200
-    max: 200
-  blueOutBlueIn:
-    m_OverrideState: 1
-    m_Value: 100
-    min: -200
-    max: 200
-  m_SelectedChannel: 2
+    m_Value: 16
+    min: 1
+    max: 32
