@@ -25,7 +25,7 @@ public class PMovement : MonoBehaviour
             waitTime = new WaitForSeconds(duration);
         }
 
-        public AbilityData (float movementSpeed,float rotationSpeed, float duration, WaitForSeconds waitTime)
+        public AbilityData(float movementSpeed, float rotationSpeed, float duration, WaitForSeconds waitTime)
         {
             this.movementSpeed = movementSpeed;
             this.rotationSpeed = rotationSpeed;
@@ -35,7 +35,7 @@ public class PMovement : MonoBehaviour
     }
 
     [Space(10f)]
-    [SerializeField] AbilityData dodge = new AbilityData(20f,15f,0.25f,new WaitForSeconds(0.25f));
+    [SerializeField] AbilityData dodge = new AbilityData(20f, 15f, 0.25f, new WaitForSeconds(0.25f));
     [SerializeField] AbilityData swiftMinor;
     [SerializeField] AbilityData swiftMajor;
 
@@ -49,9 +49,9 @@ public class PMovement : MonoBehaviour
         public float checkSpacing;
         public float checkYOffset;
         public float checkDistance;
-        [HideInInspector]public Vector3 combinedPosition;
+        [HideInInspector] public Vector3 combinedPosition;
 
-        public GroundData(float offset,LayerMask mask,float checkSpacing,float checkYOffset,float checkDistance,Vector3 combinedPosition)
+        public GroundData(float offset, LayerMask mask, float checkSpacing, float checkYOffset, float checkDistance, Vector3 combinedPosition)
         {
             this.offset = offset;
             this.mask = mask;
@@ -132,7 +132,7 @@ public class PMovement : MonoBehaviour
 
         updatedGroundPosition.Set(rb.position.x, FindGround().y + ground.offset, rb.position.z);
 
-        if (GroundCheck() && updatedGroundPosition != rb.position)
+        if (Grounded && updatedGroundPosition != rb.position)
         {
             rb.MovePosition(updatedGroundPosition);
             gravity = Vector3.zero;
@@ -180,14 +180,15 @@ public class PMovement : MonoBehaviour
         RaycastHit hit;
 
         Ray ray = new Ray(transform.TransformPoint(xOffset, ground.checkYOffset, zOffset), Vector3.down);
-
         if (Physics.Raycast(ray, out hit, raylength, ground.mask))
         {
+            Debug.DrawLine(transform.TransformPoint(xOffset, ground.checkYOffset, zOffset),hit.point,Color.green);
             groundPoint = hit.point;
             return true;
         }
         else
         {
+            Debug.DrawRay(transform.TransformPoint(xOffset, ground.checkYOffset, zOffset), Vector3.down * raylength, Color.red);
             groundPoint = Vector3.zero;
             return false;
         }
