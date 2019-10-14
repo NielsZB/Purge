@@ -45,6 +45,69 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
     min: 0.001
+--- !u!114 &-8684426275988148757
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa3b8214f75b354e9ba2caadd022259, type: 3}
+  m_Name: DepthOfField
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 1
+  focusMode:
+    m_OverrideState: 1
+    m_Value: 2
+  focusDistance:
+    m_OverrideState: 0
+    m_Value: 10
+    min: 0.1
+  nearFocusStart:
+    m_OverrideState: 1
+    m_Value: 1
+    min: 0
+  nearFocusEnd:
+    m_OverrideState: 1
+    m_Value: 30
+    min: 0
+  farFocusStart:
+    m_OverrideState: 1
+    m_Value: 55
+    min: 0
+  farFocusEnd:
+    m_OverrideState: 1
+    m_Value: 60
+    min: 0
+  nearSampleCount:
+    m_OverrideState: 1
+    m_Value: 5
+    min: 3
+    max: 8
+  nearMaxBlur:
+    m_OverrideState: 1
+    m_Value: 2.93
+    min: 0
+    max: 8
+  farSampleCount:
+    m_OverrideState: 1
+    m_Value: 7
+    min: 3
+    max: 16
+  farMaxBlur:
+    m_OverrideState: 1
+    m_Value: 0.2
+    min: 0
+    max: 16
+  highQualityFiltering:
+    m_OverrideState: 0
+    m_Value: 1
+  resolution:
+    m_OverrideState: 0
+    m_Value: 2
 --- !u!114 &-7187278450815628106
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -234,19 +297,19 @@ MonoBehaviour:
     m_Value: 0
   top:
     m_OverrideState: 1
-    m_Value: {r: 0.3842394, g: 0.28751335, b: 0.6698113, a: 1}
+    m_Value: {r: 0.25720897, g: 0.5755067, b: 0.6415094, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   middle:
     m_OverrideState: 1
-    m_Value: {r: 0.39404595, g: 0.5477667, b: 0.7264151, a: 1}
+    m_Value: {r: 0.5790762, g: 0.8584906, b: 0.84634215, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   bottom:
     m_OverrideState: 1
-    m_Value: {r: 0.48420256, g: 0.8013996, b: 0.8773585, a: 1}
+    m_Value: {r: 0.70358664, g: 0.8732117, b: 0.9150943, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
@@ -274,6 +337,7 @@ MonoBehaviour:
   - {fileID: -9118605010930429767}
   - {fileID: -4821111674514891167}
   - {fileID: 2542863868034803934}
+  - {fileID: -8684426275988148757}
 --- !u!114 &854319064455516138
 MonoBehaviour:
   m_ObjectHideFlags: 3
