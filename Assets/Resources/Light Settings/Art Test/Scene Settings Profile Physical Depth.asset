@@ -16,7 +16,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   mode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 3
   toeStrength:
     m_OverrideState: 1
     m_Value: 0.22
@@ -61,10 +61,10 @@ MonoBehaviour:
   m_AdvancedMode: 1
   focusMode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   focusDistance:
     m_OverrideState: 0
-    m_Value: 24.628006
+    m_Value: 24.627327
     min: 0.1
   nearFocusStart:
     m_OverrideState: 1
@@ -93,12 +93,12 @@ MonoBehaviour:
     min: 0
     max: 8
   farSampleCount:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 7
     min: 3
     max: 16
   farMaxBlur:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0.2
     min: 0
     max: 16
@@ -133,13 +133,13 @@ MonoBehaviour:
     max: 4
   cascadeShadowSplit0:
     m_OverrideState: 1
-    m_Value: 0.05
+    m_Value: 0.10361306
   cascadeShadowSplit1:
     m_OverrideState: 1
-    m_Value: 0.15
+    m_Value: 0.20594408
   cascadeShadowSplit2:
     m_OverrideState: 1
-    m_Value: 0.3
+    m_Value: 0.3559441
   cascadeShadowBorder0:
     m_OverrideState: 1
     m_Value: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
     m_Value: 3
   skyAmbientMode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   fogType:
     m_OverrideState: 1
     m_Value: 3
@@ -249,80 +249,6 @@ MonoBehaviour:
     m_Value: 1
     min: 0
     max: 1
---- !u!114 &-2888327491893828275
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29b00527f85bb3346a4d2cb710971587, type: 3}
-  m_Name: VolumetricFog
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  colorMode:
-    m_OverrideState: 0
-    m_Value: 1
-  color:
-    m_OverrideState: 1
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    hdr: 1
-    showAlpha: 0
-    showEyeDropper: 1
-  density:
-    m_OverrideState: 1
-    m_Value: 1
-    min: 0
-    max: 1
-  maxFogDistance:
-    m_OverrideState: 1
-    m_Value: 5000
-    min: 0
-  mipFogMaxMip:
-    m_OverrideState: 0
-    m_Value: 0.416
-    min: 0
-    max: 1
-  mipFogNear:
-    m_OverrideState: 0
-    m_Value: 10
-    min: 0
-  mipFogFar:
-    m_OverrideState: 0
-    m_Value: 10
-    min: 0
-  albedo:
-    m_OverrideState: 1
-    m_Value: {r: 0.8494571, g: 0.93148637, b: 0.9528302, a: 1}
-    hdr: 0
-    showAlpha: 1
-    showEyeDropper: 1
-  meanFreePath:
-    m_OverrideState: 1
-    m_Value: 1000
-    min: 1
-  baseHeight:
-    m_OverrideState: 1
-    m_Value: 0
-  meanHeight:
-    m_OverrideState: 1
-    m_Value: 0
-  anisotropy:
-    m_OverrideState: 1
-    m_Value: 0.53
-    min: -1
-    max: 1
-  globalLightProbeDimmer:
-    m_OverrideState: 1
-    m_Value: 0.718
-    min: 0
-    max: 1
-  enableDistantFog:
-    m_OverrideState: 0
-    m_Value: 1
 --- !u!114 &-2557648476140970637
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -371,7 +297,7 @@ MonoBehaviour:
     m_Value: 0
   top:
     m_OverrideState: 1
-    m_Value: {r: 0.25882357, g: 0.6431373, b: 0.5527603, a: 1}
+    m_Value: {r: 0.25720897, g: 0.5755067, b: 0.6415094, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
@@ -390,44 +316,6 @@ MonoBehaviour:
   gradientDiffusion:
     m_OverrideState: 1
     m_Value: 1
---- !u!114 &-1934793832116920312
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b8bcdf71d7fafa419fca1ed162f5fc9, type: 3}
-  m_Name: ColorAdjustments
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  postExposure:
-    m_OverrideState: 0
-    m_Value: 0
-  contrast:
-    m_OverrideState: 1
-    m_Value: 10.6
-    min: -100
-    max: 100
-  colorFilter:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
-    hdr: 1
-    showAlpha: 0
-    showEyeDropper: 1
-  hueShift:
-    m_OverrideState: 0
-    m_Value: 0
-    min: -180
-    max: 180
-  saturation:
-    m_OverrideState: 1
-    m_Value: -4.7
-    min: -100
-    max: 100
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,7 +326,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Scene Settings Profile
+  m_Name: Scene Settings Profile Physical Depth
   m_EditorClassIdentifier: 
   components:
   - {fileID: -7187278450815628106}
@@ -448,11 +336,8 @@ MonoBehaviour:
   - {fileID: 854319064455516138}
   - {fileID: -9118605010930429767}
   - {fileID: -4821111674514891167}
+  - {fileID: 2542863868034803934}
   - {fileID: -8684426275988148757}
-  - {fileID: -2888327491893828275}
-  - {fileID: 6003601247524461470}
-  - {fileID: -1934793832116920312}
-  - {fileID: 7006354809787571698}
 --- !u!114 &854319064455516138
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -465,16 +350,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f077503be6ae942a1e1245dbd53ea9, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0.115
     min: 0
     max: 1
   scatter:
     m_OverrideState: 1
-    m_Value: 0.217
+    m_Value: 0.586
     min: 0
     max: 1
   tint:
@@ -502,7 +387,7 @@ MonoBehaviour:
   anamorphic:
     m_OverrideState: 1
     m_Value: 1
---- !u!114 &6003601247524461470
+--- !u!114 &2542863868034803934
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -511,77 +396,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4910d90e50201484ba448b791a192696, type: 3}
-  m_Name: VolumetricLightingController
+  m_Script: {fileID: 11500000, guid: 9008a067f4d626c4d8bc4bc48f04bb89, type: 3}
+  m_Name: AmbientOcclusion
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
-  depthExtent:
+  intensity:
     m_OverrideState: 1
-    m_Value: 64
-    min: 0.1
-  sliceDistributionUniformity:
-    m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.15
     min: 0
-    max: 1
---- !u!114 &7006354809787571698
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7649d9368d3a5c4ab8ad01a63e04962, type: 3}
-  m_Name: ChannelMixer
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  redOutRedIn:
-    m_OverrideState: 1
-    m_Value: 92
-    min: -200
-    max: 200
-  redOutGreenIn:
+    max: 4
+  stepCount:
     m_OverrideState: 1
     m_Value: 3
-    min: -200
-    max: 200
-  redOutBlueIn:
+    min: 2
+    max: 32
+  radius:
     m_OverrideState: 1
-    m_Value: -35
-    min: -200
-    max: 200
-  greenOutRedIn:
-    m_OverrideState: 0
+    m_Value: 0.85
+    min: 0.25
+    max: 5
+  fullResolution:
+    m_OverrideState: 1
+    m_Value: 1
+  maximumRadiusInPixels:
+    m_OverrideState: 1
+    m_Value: 41
+    min: 16
+    max: 256
+  directLightingStrength:
+    m_OverrideState: 1
     m_Value: 0
-    min: -200
-    max: 200
-  greenOutGreenIn:
-    m_OverrideState: 0
-    m_Value: 100
-    min: -200
-    max: 200
-  greenOutBlueIn:
-    m_OverrideState: 0
+    min: 0
+    max: 1
+  enableRaytracing:
+    m_OverrideState: 1
     m_Value: 0
-    min: -200
-    max: 200
-  blueOutRedIn:
-    m_OverrideState: 0
+  rayLength:
+    m_OverrideState: 1
+    m_Value: 0.5
+    min: 0
+    max: 50
+  enableFilter:
+    m_OverrideState: 1
     m_Value: 0
-    min: -200
-    max: 200
-  blueOutGreenIn:
-    m_OverrideState: 0
-    m_Value: 0
-    min: -200
-    max: 200
-  blueOutBlueIn:
-    m_OverrideState: 0
-    m_Value: 100
-    min: -200
-    max: 200
-  m_SelectedChannel: 0
+  numSamples:
+    m_OverrideState: 1
+    m_Value: 4
+    min: 1
+    max: 64
+  filterRadius:
+    m_OverrideState: 1
+    m_Value: 16
+    min: 1
+    max: 32
