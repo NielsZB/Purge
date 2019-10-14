@@ -61,10 +61,10 @@ MonoBehaviour:
   m_AdvancedMode: 1
   focusMode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   focusDistance:
     m_OverrideState: 0
-    m_Value: 24.628006
+    m_Value: 24.627327
     min: 0.1
   nearFocusStart:
     m_OverrideState: 1
@@ -93,12 +93,12 @@ MonoBehaviour:
     min: 0
     max: 8
   farSampleCount:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 7
     min: 3
     max: 16
   farMaxBlur:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0.2
     min: 0
     max: 16
@@ -133,13 +133,13 @@ MonoBehaviour:
     max: 4
   cascadeShadowSplit0:
     m_OverrideState: 1
-    m_Value: 0.05
+    m_Value: 0.10361306
   cascadeShadowSplit1:
     m_OverrideState: 1
-    m_Value: 0.15
+    m_Value: 0.20594408
   cascadeShadowSplit2:
     m_OverrideState: 1
-    m_Value: 0.3
+    m_Value: 0.3559441
   cascadeShadowBorder0:
     m_OverrideState: 1
     m_Value: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
     m_Value: 3
   skyAmbientMode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   fogType:
     m_OverrideState: 1
     m_Value: 3
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Scene Settings Profile
+  m_Name: Scene Settings Profile Physical Depth
   m_EditorClassIdentifier: 
   components:
   - {fileID: -7187278450815628106}
