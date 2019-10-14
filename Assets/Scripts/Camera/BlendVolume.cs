@@ -23,7 +23,6 @@ public class BlendVolume : MonoBehaviour
     MeshCollider outerMeshCollider;
 
     Mesh outerMesh;
-    TriggerCheck outerTrigger;
     void Awake()
     {
         GetComponent<Renderer>().enabled = false;
@@ -36,7 +35,6 @@ public class BlendVolume : MonoBehaviour
             outerObject.layer = gameObject.layer;
 
             outerMeshCollider = outerObject.AddComponent<MeshCollider>();
-            outerTrigger = outerObject.AddComponent<TriggerCheck>();
 
             if (outerMesh == null)
             {
@@ -52,17 +50,6 @@ public class BlendVolume : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (outerTrigger.HasTarget)
-        {
-            BlendValue = GetBlendValue(outerTrigger.Target.position, type, true);
-        }
-        else
-        {
-            BlendValue = 0f;
-        }
-    }
 
     void CreateOuterMesh()
     {
@@ -112,7 +99,7 @@ public class BlendVolume : MonoBehaviour
     {
         if (useTrigger)
         {
-            if (!outerTrigger.HasTarget || !outerMeshCollider.bounds.Contains(point))
+            if (!outerMeshCollider.bounds.Contains(point))
             {
                 return 0f;
             }
