@@ -13506,10 +13506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99267d02d8368a40810a4056af2debd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCamera: {fileID: 0}
-  currentVirtualCamera: {fileID: 0}
-  volume: {fileID: 0}
-  brain: {fileID: 0}
 --- !u!1 &1208891792
 GameObject:
   m_ObjectHideFlags: 19
@@ -13539,7 +13535,6 @@ MonoBehaviour:
   m_Script: {fileID: 1540903695}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Entries: []
 --- !u!4 &1208891794
 Transform:
   m_ObjectHideFlags: 19
