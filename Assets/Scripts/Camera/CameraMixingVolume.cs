@@ -7,8 +7,7 @@ public class CameraMixingVolume : MonoBehaviour
     public struct Zone
     {
         public CinemachineVirtualCameraBase camera;
-        [HideInInspector] public float cameraWeight;
-        public float weight;
+        [HideInInspector] public float weight;
         public Vector3 position;
         public float radius;
         public float mixWidth;
@@ -26,6 +25,7 @@ public class CameraMixingVolume : MonoBehaviour
     CameraMixingManager manager;
 
     BlendCamera[] blendCameras;
+    BlendCamera exitBlendCamera;
     private void Start()
     {
         manager = FindObjectOfType<CameraMixingManager>();
@@ -54,52 +54,85 @@ public class CameraMixingVolume : MonoBehaviour
                 blendCamera.camera = zones[i].camera;
             }
 
-            blendCamera.weight = zones[i].cameraWeight * zones[i].weight;
+            blendCamera.weight = zones[i].weight;
             blendCamera.originalParent = blendCamera.camera.transform.parent;
 
             blendCameras[i] = blendCamera;
         }
     }
 
-    private void Update()
+    void Update()
     {
         if (HasTarget)
         {
             UpdateWeights();
-
-            for (int i = 0; i < zones.Length; i++)
-            {
-                blendCameras[i].weight = Mathf.SmoothStep(blendCameras[i].weight, zones[i].cameraWeight, smoothing);
-            }
-
-            manager.UpdateWeight(blendCameras);
         }
+        else
+        {
+            if (exitBlendCamera.camera != null)
+            {
+                float compoundedWeight = 0f;
+
+                for (int i = 0; i < blendCameras.Length; i++)
+                {
+                    if (blendCameras[i].camera != exitBlendCamera.camera)
+                    {
+                        compoundedWeight += blendCameras[i].weight;
+                    }
+                }
+
+                if (compoundedWeight > 0.01f)
+                {
+                    for (int i = 0; i < zones.Length; i++)
+                    {
+                        if (blendCameras[i].camera != exitBlendCamera.camera)
+                        {
+                            blendCameras[i].weight = Mathf.SmoothStep(blendCameras[i].weight, 0f, smoothing);
+                        }
+                    }
+                    manager.UpdateWeight(blendCameras);
+                }
+                else
+                {
+                    manager.Remove(blendCameras);
+                    manager.Add(exitBlendCamera);
+                    exitBlendCamera.camera = null;
+                }
+            }
+        }
+
     }
-    void UpdateWeights()
+
+    private void UpdateWeights()
     {
         Vector3 position = Target.position;
+
         for (int i = 0; i < zones.Length; i++)
         {
             Zone zone = zones[i];
+
             float distance = (zone.position - position).magnitude;
+
             if (distance < zone.radius + zone.mixWidth)
             {
                 if (distance < zone.radius)
                 {
-                    zone.cameraWeight = 1f * zone.weight;
+                    zone.weight = 1f;
                 }
                 else
                 {
-                    zone.cameraWeight = distance.Remap(zone.radius + zone.mixWidth, zone.radius, zone.mixingCurve) * zone.weight;
+                    zone.weight = distance.Remap(zone.radius + zone.mixWidth, zone.radius, zone.mixingCurve);
                 }
             }
             else
             {
-                zone.cameraWeight = 0f;
+                zone.weight = 0f;
             }
 
-            zones[i] = zone;
+            blendCameras[i].weight = Mathf.SmoothStep(blendCameras[i].weight, zone.weight, smoothing);
         }
+
+        manager.UpdateWeight(blendCameras);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -110,20 +143,16 @@ public class CameraMixingVolume : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-
         float highestWeight = 0f;
-        BlendCamera activeCamera = new BlendCamera();
 
         for (int i = 0; i < blendCameras.Length; i++)
         {
             if (blendCameras[i].weight > highestWeight)
             {
-                activeCamera = blendCameras[i];
+                exitBlendCamera = blendCameras[i];
                 highestWeight = blendCameras[i].weight;
             }
         }
-        manager.Remove(blendCameras);
-        manager.Add(activeCamera);
         Target = null;
     }
 }

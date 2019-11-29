@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Health : Damagable
 {
-    [SerializeField] float health;
-    [SerializeField] float siphonAmount;
-    [SerializeField] float siphonDuration;
+    [SerializeField] float health = 10f;
+    [SerializeField] float siphonAmount = 0f;
+    [SerializeField] float siphonDuration = 0f;
     public float CurrentHealth { get; private set; }
 
     public float SiphonAmount { get { return siphonAmount; } }

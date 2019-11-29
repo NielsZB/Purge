@@ -5,7 +5,7 @@ using UnityEngine;
 public class PSiphon : MonoBehaviour
 {
     [SerializeField] float radius = 1.5f;
-    [SerializeField] LayerMask mask;
+    [SerializeField] LayerMask mask = new LayerMask();
 
     Health healthModule;
     PMovement movementModule;

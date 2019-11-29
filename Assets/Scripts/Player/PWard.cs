@@ -6,11 +6,11 @@ public class PWard : MonoBehaviour
 {
     [SerializeField] GameObject shield;
     
-    [SerializeField] float wardDuration;
-    [SerializeField] float wardCooldown;
+    [SerializeField] float wardDuration = 0.25f;
+    [SerializeField] float wardCooldown = 1f;
     [Space(10f)]
-    [SerializeField] float burstDuration;
-    [SerializeField] float burstCooldown;
+    [SerializeField] float burstDuration = 0.25f;
+    [SerializeField] float burstCooldown = 1f;
     public bool IsActive { get; private set; }
     public bool OnCooldown { get; private set; }
 

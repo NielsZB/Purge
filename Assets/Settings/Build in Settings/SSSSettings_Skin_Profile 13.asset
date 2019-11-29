@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: SSSSettings_Skin_Profile 13
   m_EditorClassIdentifier: 
   profile:
-    name: Profile 13
     scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     transmissionTint: {r: 1, g: 1, b: 1, a: 1}
     texturingMode: 0
