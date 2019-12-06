@@ -97,7 +97,7 @@ MonoBehaviour:
   boostDuration: 30
   boostAmount: 3
   dodge:
-    movementSpeed: 17.5
+    movementSpeed: 17.7
     rotationSpeed: 30
     duration: 0.45
   swiftMinor:
@@ -112,10 +112,10 @@ MonoBehaviour:
     offset: 0
     mask:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 2147483649
     checkSpacing: 0.5
     checkYOffset: 0.5
-    checkDistance: 0.6
+    checkDistance: 0.8
     combinedPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &9123856686951639488
 MonoBehaviour:
@@ -203,7 +203,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9123856686951639480}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0c2118519f6d4de42b1d468fb548a989, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.33
