@@ -177,18 +177,19 @@ public class PMovement : MonoBehaviour
 
     bool GroundCheck(float xOffset, float zOffset, float raylength, out Vector3 groundPoint)
     {
+        Vector3 RayOrigin = transform.TransformPoint(xOffset, ground.checkYOffset, zOffset);
         RaycastHit hit;
 
-        Ray ray = new Ray(transform.TransformPoint(xOffset, ground.checkYOffset, zOffset), Vector3.down);
+        Ray ray = new Ray(RayOrigin, Vector3.down);
         if (Physics.Raycast(ray, out hit, raylength, ground.mask))
         {
-            Debug.DrawLine(transform.TransformPoint(xOffset, ground.checkYOffset, zOffset),hit.point,Color.green);
+            Debug.DrawLine(RayOrigin, hit.point, Color.green);
             groundPoint = hit.point;
             return true;
         }
         else
         {
-            Debug.DrawRay(transform.TransformPoint(xOffset, ground.checkYOffset, zOffset), Vector3.down * raylength, Color.red);
+            Debug.DrawRay(RayOrigin, Vector3.down * raylength, Color.red);
             groundPoint = Vector3.zero;
             return false;
         }

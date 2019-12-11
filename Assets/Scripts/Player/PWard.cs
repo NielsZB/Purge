@@ -18,10 +18,12 @@ public class PWard : MonoBehaviour
     float cooldown;
 
     WaitForEndOfFrame endOfFrame;
-    
+
+    Health health;
     private void Start()
     {
         endOfFrame = new WaitForEndOfFrame();
+        health = GetComponent<Health>();
     }
 
     public void Ward()
@@ -48,6 +50,7 @@ public class PWard : MonoBehaviour
         IsActive = true;
         shield.SetActive(true);
         float t = 0;
+        health.IsVulnerable = false;
 
         while (t < 1)
         {
@@ -55,6 +58,7 @@ public class PWard : MonoBehaviour
             yield return endOfFrame;
         }
 
+        health.IsVulnerable = true;
         shield.SetActive(false);
         StartCoroutine(Cooldown());
         IsActive = false;
