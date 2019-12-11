@@ -11,9 +11,9 @@ NavMeshProjectSettings:
     cost: 1
   - name: Jump
     cost: 2
-  - name: 
+  - name: Not
     cost: 1
-  - name: 
+  - name: NOT TOUCHABLE
     cost: 1
   - name: 
     cost: 1
