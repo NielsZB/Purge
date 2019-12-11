@@ -174,29 +174,28 @@ public class PController : MonoBehaviour
             {
                 // No hands
                 attackModule.Melee();
-                Debug.Log("Attack");
             }
         }
 
         // Heal
-        else if (Input.GetButtonDown(inputs.Heal))
-        {
-            if (leftHand)
-            {
-                if (rightHand)
-                {
-                    // Both hands
-                    siphonModule.Energy();
-                    Debug.Log("Enegy Siphon");
-                }
-                else
-                {
-                    // One hand
-                    siphonModule.Life();
-                    Debug.Log("Life Siphon");
-                }
-            }
-        }
+        //else if (Input.GetButtonDown(inputs.Heal))
+        //{
+        //    if (leftHand)
+        //    {
+        //        if (rightHand)
+        //        {
+        //            // Both hands
+        //            siphonModule.Energy();
+        //            Debug.Log("Enegy Siphon");
+        //        }
+        //        else
+        //        {
+        //            // One hand
+        //            siphonModule.Life();
+        //            Debug.Log("Life Siphon");
+        //        }
+        //    }
+        //}
 
 
 
