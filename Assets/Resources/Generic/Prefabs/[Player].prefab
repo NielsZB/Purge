@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9123856686951639495}
   - component: {fileID: 9123856686951639492}
-  - component: {fileID: 9123856686951639490}
+  - component: {fileID: 86013716757096576}
   - component: {fileID: 9123856686951639481}
   - component: {fileID: 9123856686951639488}
   - component: {fileID: 9123856686951639502}
@@ -222,7 +222,7 @@ MonoBehaviour:
     Attack: X
     Heal: Y
     Targeting: RightStickButton
---- !u!114 &9123856686951639490
+--- !u!114 &86013716757096576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,10 +231,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9123856686951639480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75cceda00ef10904b8a817037b67b317, type: 3}
+  m_Script: {fileID: 11500000, guid: 55a6ea78201a7dc4e90460db745d49a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  isVulnerable: 1
+  health: 10
   hitGradient:
     serializedVersion: 2
     key0: {r: 0.81960785, g: 0.15294108, b: 0.4975239, a: 1}
@@ -267,16 +268,16 @@ MonoBehaviour:
   deathGradient:
     serializedVersion: 2
     key0: {r: 0.81960785, g: 0.15294108, b: 0.4975239, a: 1}
-    key1: {r: 0, g: 0, b: 0, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0.3962264, g: 0, b: 0.20510532, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 65535
-    ctime2: 0
+    ctime1: 9175
+    ctime2: 65535
     ctime3: 0
     ctime4: 0
     ctime5: 0
@@ -291,9 +292,10 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 2
+    m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   render: {fileID: 9123856688824671122}
+  Health: {fileID: 11400000, guid: 469cfe628d5977348ae06e30e8d3affc, type: 2}
 --- !u!114 &9123856686951639481
 MonoBehaviour:
   m_ObjectHideFlags: 0

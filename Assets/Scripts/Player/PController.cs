@@ -43,7 +43,7 @@ public class PController : MonoBehaviour
 
     PMovement movementModule;
     PTargeting targetingModule;
-    Health healthModule;
+    PHealth healthModule;
     PWard wardModule;
     PAttack attackModule;
     PSiphon siphonModule;
@@ -64,7 +64,7 @@ public class PController : MonoBehaviour
     {
         movementModule = GetComponent<PMovement>();
         targetingModule = GetComponent<PTargeting>();
-        healthModule = GetComponent<Health>();
+        healthModule = GetComponent<PHealth>();
         wardModule = GetComponent<PWard>();
         attackModule = GetComponent<PAttack>();
         siphonModule = GetComponent<PSiphon>();
@@ -73,8 +73,10 @@ public class PController : MonoBehaviour
     private void Update()
     {
         // Death Check;
-        if (healthModule.Dead)
+        if (healthModule.IsDead)
         {
+            movementModule.enabled = false;
+            targetingModule.enabled = false;
             return;
         }
 
@@ -205,6 +207,7 @@ public class PController : MonoBehaviour
             if (targetingModule.Target == null)
             {
                 targetingModule.GetTarget();
+
             }
             else
             {

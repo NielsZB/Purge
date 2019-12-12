@@ -50,7 +50,7 @@ public class PWard : MonoBehaviour
         IsActive = true;
         shield.SetActive(true);
         float t = 0;
-        health.IsVulnerable = false;
+        health.SetVulnerability(false);
 
         while (t < 1)
         {
@@ -58,7 +58,7 @@ public class PWard : MonoBehaviour
             yield return endOfFrame;
         }
 
-        health.IsVulnerable = true;
+        health.SetVulnerability(true);
         shield.SetActive(false);
         StartCoroutine(Cooldown());
         IsActive = false;

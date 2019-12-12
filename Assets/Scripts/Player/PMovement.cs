@@ -76,6 +76,7 @@ public class PMovement : MonoBehaviour
     Rigidbody rb;
     Transform cameraTransform;
     Transform target;
+    PTargeting targetingModule;
 
     Vector3 direction;
     Quaternion directionRotation;
@@ -101,6 +102,7 @@ public class PMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        targetingModule = GetComponent<PTargeting>();
         rb.useGravity = false;
         cameraTransform = Camera.main.transform;
         dodge.UpdateWaitTime();
@@ -121,8 +123,8 @@ public class PMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        target = targetingModule.Target;
         Grounded = GroundCheck();
-
         if (!Grounded)
         {
             gravity += Physics.gravity * Time.deltaTime;
@@ -150,14 +152,28 @@ public class PMovement : MonoBehaviour
 
     void SetDirectionRotation()
     {
-        if (direction != Vector3.zero)
+        if (targetingModule.IsEnabled)
         {
-            directionRotation = Quaternion.LookRotation(direction);
+            Vector3 correctedTargetPosition = target.position;
+            correctedTargetPosition.y = transform.position.y;
+            directionRotation = Quaternion.LookRotation(correctedTargetPosition - transform.position);
 
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 directionRotation,
                 Time.fixedDeltaTime * inputAmount * rotationSpeed);
+        }
+        else
+        {
+            if (direction != Vector3.zero)
+            {
+                directionRotation = Quaternion.LookRotation(direction);
+
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    directionRotation,
+                    Time.fixedDeltaTime * inputAmount * rotationSpeed);
+            }
         }
     }
 
