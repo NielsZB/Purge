@@ -1,107 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using NaughtyAttributes;
-public class Health : Damagable
+﻿using UnityEngine;
+
+public class Health : MonoBehaviour
 {
-    [SerializeField] float health = 10f;
-    [ShowNativeProperty] public float CurrentHealth { get; private set; }
-    //[SerializeField] float siphonAmount = 0f;
-    //[SerializeField] float siphonDuration = 0f;
-    [SerializeField] Gradient hitGradient;
-    [SerializeField] Gradient deathGradient;
-
-    // public float SiphonAmount { get { return siphonAmount; } }
-    public bool Dead { get; private set; }
-    public bool Siphonable { get; private set; }
-
-    public bool IsVulnerable = true;
-    // WaitForSeconds waitSeconds;
+    [SerializeField] bool isVulnerable = true;
+    [SerializeField] protected float health = 10f;
+    [SerializeField] protected Gradient hitGradient;
+    [SerializeField] protected Gradient deathGradient;
+    [SerializeField] protected Renderer render;
 
 
-    public Renderer render;
+    public float CurrentHealth { get; protected set; }
+    public bool IsDead { get; protected set; } = false;
+    public bool IsVulnerable { get { return IsVulnerable; } }
 
-    MaterialPropertyBlock materialPropertyBlock;
-    private void Awake()
+    protected MaterialPropertyBlock materialPropertyBlock;
+    protected Rigidbody rb;
+    protected virtual void Awake()
     {
-        Dead = false;
         CurrentHealth = health;
-        //waitSeconds = new WaitForSeconds(siphonDuration);
         materialPropertyBlock = new MaterialPropertyBlock();
+        rb = GetComponent<Rigidbody>();
     }
 
-    public override void TakeDamage(float damage)
+    public virtual void TakeDamage(float amount)
     {
-        if (IsVulnerable)
-        {
-            CurrentHealth -= damage;
-            if (CurrentHealth <= 0)
-            {
-                StartCoroutine(ShowDeath());
-                Dead = true;
-                //StartCoroutine(SiphonWindow());
-            }
-            else
-            {
-                StartCoroutine(ShowHit());
-            }
-            Debug.Log($"{name} has taken {damage} and has {CurrentHealth} left!");
-        }
-    }
-    public override void TakeDamage(float damage, Vector3 direction)
-    {
+        if (!isVulnerable)
+            return;
 
-        TakeDamage(damage);
+        CurrentHealth -= amount;
+
+        //Debug.Log($"{name} was damaged by {amount} and has {CurrentHealth} left!", gameObject);
     }
 
-    public void GainHealth(float health)
+    public void SetVulnerability(bool value)
     {
-
-        CurrentHealth += health;
-        if (CurrentHealth > this.health)
-        {
-            CurrentHealth = this.health;
-        }
-    }
-
-    public void AddToMaxHealth(float amount)
-    {
-        health += amount;
-    }
-
-    //IEnumerator SiphonWindow()
-    //{
-    //    Siphonable = true;
-    //    yield return waitSeconds;
-    //    Siphonable = false;
-    //}
-
-    IEnumerator ShowHit()
-    {
-        float t = 0;
-
-        while (t < 1)
-        {
-            t += Time.deltaTime / 0.25f;
-            render.GetPropertyBlock(materialPropertyBlock);
-            materialPropertyBlock.SetColor("_BaseColor", hitGradient.Evaluate(t));
-            render.SetPropertyBlock(materialPropertyBlock);
-            yield return null;
-        }
-    }
-
-    IEnumerator ShowDeath()
-    {
-        float t = 0;
-
-        while (t < 1)
-        {
-            t += Time.deltaTime / 0.25f;
-            render.GetPropertyBlock(materialPropertyBlock);
-            materialPropertyBlock.SetColor("_BaseColor", deathGradient.Evaluate(t));
-            render.SetPropertyBlock(materialPropertyBlock);
-            yield return null;
-        }
-        Destroy(gameObject);
+        isVulnerable = value;
     }
 }

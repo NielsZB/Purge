@@ -4,6 +4,7 @@ using UnityEngine;
 using NaughtyAttributes;
 public class PTargeting : MonoBehaviour
 {
+    [SerializeField] Transform Indicator;
     [SerializeField] float radius = 10;
     [SerializeField] float updateRadiusMultiplier = 0.9f;
     [SerializeField] LayerMask mask = new LayerMask();
@@ -13,6 +14,7 @@ public class PTargeting : MonoBehaviour
     public bool IsEnabled { get; private set; }
 
     public Transform Target { get; private set; }
+    EHealth targetHealth;
 
     List<Transform> targets = new List<Transform>();
     Collider[] colliders = new Collider[10];
@@ -23,6 +25,11 @@ public class PTargeting : MonoBehaviour
     {
         Vector3 direction = new Vector3(transform.forward.x, transform.forward.z);
         Target = GetTargetNearestDirection(direction);
+
+        if (Target != null)
+        {
+            targetHealth = Target.GetComponent<EHealth>();
+        }
     }
     public void StopTargeting()
     {
@@ -40,6 +47,7 @@ public class PTargeting : MonoBehaviour
     private void Awake()
     {
         cameraTransform = Camera.main.transform;
+        Indicator.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -48,6 +56,16 @@ public class PTargeting : MonoBehaviour
         {
             if (targets.Count > 0)
             {
+               
+                if (targetHealth != null)
+                {
+                    if (targetHealth.IsDead)
+                    {
+                        targets.Remove(Target);
+                        GetTarget();
+                    }
+                }
+
                 Vector3 position = transform.position;
                 for (int i = 0; i < targets.Count; i++)
                 {
@@ -66,11 +84,27 @@ public class PTargeting : MonoBehaviour
                         }
                     }
                 }
+
+
             }
             else
             {
+              
                 IsEnabled = false;
             }
+        }
+    }
+
+    private void Update()
+    {
+        if (Target != null)
+        {
+            Indicator.gameObject.SetActive(true);
+            Indicator.position = Target.position + (Vector3.up * 1.1f);
+        }
+        else
+        {
+            Indicator.gameObject.SetActive(false);
         }
     }
 
