@@ -259,11 +259,11 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_497B19BD: {r: 0.16171236, g: 0.2672786, b: 0.4339623, a: 0}
-    - Color_8A5E4035: {r: 0.15663938, g: 0.37475365, b: 0.6037736, a: 0}
+    - Color_497B19BD: {r: 1, g: 0, b: 0.36501074, a: 0}
+    - Color_8A5E4035: {r: 0.976465, g: 1, b: 0, a: 0}
     - Color_960CE927: {r: 0, g: 0, b: 0, a: 0}
     - Color_A5F2A5B1: {r: 0, g: 0, b: 0, a: 0}
-    - Color_BEC85821: {r: 0.23349057, g: 0.5674962, b: 0.9339623, a: 0}
+    - Color_BEC85821: {r: 1, g: 0, b: 0.079761505, a: 0}
     - Vector2_974015A4: {r: 0.5, g: 0.04, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
