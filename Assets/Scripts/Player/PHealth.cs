@@ -17,6 +17,10 @@ public class PHealth : Health
     {
         base.TakeDamage(amount);
         Health.Set(CurrentHealth);
+        if(IsDead)
+        {
+            controller.DisableControls();
+        }
     }
 
     public void GainHealth(float amount)
