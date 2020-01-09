@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using System.Collections;
 public class Health : MonoBehaviour
 {
     [SerializeField] bool isVulnerable = true;
@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
 
     protected MaterialPropertyBlock materialPropertyBlock;
     protected Rigidbody rb;
+
     protected virtual void Awake()
     {
         CurrentHealth = health;
@@ -29,7 +30,48 @@ public class Health : MonoBehaviour
 
         CurrentHealth -= amount;
 
-        //Debug.Log($"{name} was damaged by {amount} and has {CurrentHealth} left!", gameObject);
+        if(CurrentHealth <= 0)
+        {
+            IsDead = true;
+        }
+
+        StartCoroutine(ShowImpact());
+    }
+
+    protected virtual IEnumerator ShowImpact()
+    {
+        float t = 0;
+
+        float duration;
+        Gradient gradient = new Gradient();
+
+        if(IsDead)
+        {
+            duration = 0.15f;
+            gradient = deathGradient;
+        }
+        else
+        {
+            duration = 0.25f;
+            gradient = hitGradient;
+        }
+
+        while(t < 1)
+        {
+            t += Time.deltaTime / duration;
+
+            render.GetPropertyBlock(materialPropertyBlock);
+            materialPropertyBlock.SetColor("_baseColor", gradient.Evaluate(t));
+            render.SetPropertyBlock(materialPropertyBlock);
+
+            yield return null;
+        }
+
+        if(IsDead)
+        {
+            rb.isKinematic = false;
+            rb.AddForce(-transform.forward * 2f);
+        }
     }
 
     public void SetVulnerability(bool value)
