@@ -44,7 +44,10 @@ public class Movement : MonoBehaviour
 
     private void SetupRigidbody()
     {
-        rb = gameObject.AddComponent<Rigidbody>();
+        if(!TryGetComponent(out rb))
+        {
+            rb = gameObject.AddComponent<Rigidbody>();
+        }
         rb.freezeRotation = true;
         rb.useGravity = false;
     }

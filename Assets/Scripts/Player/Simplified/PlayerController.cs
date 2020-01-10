@@ -33,20 +33,45 @@ public class PlayerController : MonoBehaviour
 
     public bool Sheathed { get; private set; }
 
-    bool controlsEnabled;
+    bool controlsEnabled = true;
+
+    Movement movementModule;
+    Targeting targetingModule;
+
+    private void Start()
+    {
+        movementModule = GetComponent<Movement>();
+        targetingModule = GetComponent<Targeting>();
+    }
 
     private void Update()
     {
-        if(!controlsEnabled)
-        {
+        if (!controlsEnabled)
             return;
-        }
 
         // Update Inputs
         movementInput.Set(Input.GetAxis(movementHorizontal), Input.GetAxis(movementVertical));
         targetingInput.Set(Input.GetAxis(targetingHorizontal), Input.GetAxis(targetingVertical));
 
-        // Movement
+        // Movement and Dodge
+        movementModule.Move(movementInput, Input.GetButtonDown(dodge));
 
+
+    }
+
+    public void EnableControls()
+    {
+        controlsEnabled = true;
+        movementModule.enabled = true;
+        targetingModule.enabled = true;
+        movementModule.EnableMovement();
+    }
+
+    public void DisableControls()
+    {
+        controlsEnabled = false;
+        movementModule.DisableMovement();
+        movementModule.enabled = false;
+        targetingModule.enabled = false;
     }
 }
