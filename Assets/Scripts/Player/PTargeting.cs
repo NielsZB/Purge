@@ -56,7 +56,6 @@ public class PTargeting : MonoBehaviour
         {
             if (targets.Count > 0)
             {
-               
                 if (targetHealth != null)
                 {
                     if (targetHealth.IsDead)

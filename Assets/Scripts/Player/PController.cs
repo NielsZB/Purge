@@ -60,20 +60,21 @@ public class PController : MonoBehaviour
     bool readyToChangeTarget;
     bool leftHand;
     bool rightHand;
+
+    bool controlsEnabled;
     private void Start()
     {
         movementModule = GetComponent<PMovement>();
         targetingModule = GetComponent<PTargeting>();
-        healthModule = GetComponent<PHealth>();
         wardModule = GetComponent<PWard>();
         attackModule = GetComponent<PAttack>();
         siphonModule = GetComponent<PSiphon>();
+        EnableControls();
     }
 
     private void Update()
     {
-        // Death Check;
-        if (healthModule.IsDead)
+        if (!controlsEnabled)
         {
             movementModule.enabled = false;
             targetingModule.enabled = false;
@@ -179,28 +180,6 @@ public class PController : MonoBehaviour
             }
         }
 
-        // Heal
-        //else if (Input.GetButtonDown(inputs.Heal))
-        //{
-        //    if (leftHand)
-        //    {
-        //        if (rightHand)
-        //        {
-        //            // Both hands
-        //            siphonModule.Energy();
-        //            Debug.Log("Enegy Siphon");
-        //        }
-        //        else
-        //        {
-        //            // One hand
-        //            siphonModule.Life();
-        //            Debug.Log("Life Siphon");
-        //        }
-        //    }
-        //}
-
-
-
         // Target
         if (Input.GetButtonDown(inputs.Targeting))
         {
@@ -228,5 +207,15 @@ public class PController : MonoBehaviour
                 readyToChangeTarget = true;
             }
         }
+    }
+
+    public void EnableControls()
+    {
+        controlsEnabled = true;
+    }
+
+    public void DisableControls()
+    {
+        controlsEnabled = false;
     }
 }

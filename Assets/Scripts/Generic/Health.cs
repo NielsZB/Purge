@@ -9,12 +9,13 @@ public class Health : MonoBehaviour
     [SerializeField] protected Renderer render;
 
 
-    public float CurrentHealth { get; protected set; }
+    public float CurrentHealth { get; protected set; } 
     public bool IsDead { get; protected set; } = false;
     public bool IsVulnerable { get { return IsVulnerable; } }
 
-    protected MaterialPropertyBlock materialPropertyBlock;
+    protected MaterialPropertyBlock materialPropertyBlock; 
     protected Rigidbody rb;
+
 
     protected virtual void Awake()
     {
