@@ -125,6 +125,7 @@ public class PMovement : MonoBehaviour
     {
         target = targetingModule.Target;
         Grounded = GroundCheck();
+
         if (!Grounded)
         {
             gravity += Physics.gravity * Time.deltaTime;
