@@ -14,7 +14,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
@@ -22,6 +22,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_63FBF62C:
+        m_Texture: {fileID: 2800000, guid: e8931c16288bd88438148a4b0f4f8cae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_8E3C864D:
+        m_Texture: {fileID: 2800000, guid: d0656930e3684ca4398b1bb88251319c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -119,6 +127,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_2210298B: 1
+    - Vector1_32E1B8FF: 0.01
+    - Vector1_3FBC4038: 0.9
+    - Vector1_52FFA332: 5
+    - Vector1_697E322B: 0.26
+    - Vector1_95ACB1B3: 1
+    - Vector1_9B712ED6: 35
+    - Vector1_E3B67DEC: -2.88
+    - Vector1_F3B5D10C: 1
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -241,8 +258,9 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_83754FC4: {r: 1, g: 0.09470569, b: 0, a: 0}
-    - Color_EB64EB79: {r: 0.13118546, g: 0.13292506, b: 0.41509432, a: 0}
+    - Color_83754FC4: {r: 0.34905657, g: 0.34905657, b: 0.34905657, a: 0}
+    - Color_8B752D2E: {r: 0.3537736, g: 0.36319137, b: 0.4716981, a: 0}
+    - Color_EB64EB79: {r: 0.0065766806, g: 0.0018244971, b: 0.38679245, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
