@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public string leftHand = "LB";
     public string rightHand = "RB";
     [Space(10)]
-    public string dodge = "A";
+    public string dash = "A";
     public string shield = "B";
     public string attack = "X";
     public string sheathe = "Y";
@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     Vector2 movementInput;
     Vector2 targetingInput;
+
+    bool readyToAttack = true;
 
     float targetingInputAmount
     {
@@ -37,11 +39,14 @@ public class PlayerController : MonoBehaviour
 
     Movement movementModule;
     Targeting targetingModule;
-
+    Attacking attackingModule;
+    Animator animatorModule;
     private void Start()
     {
         movementModule = GetComponent<Movement>();
         targetingModule = GetComponent<Targeting>();
+        attackingModule = GetComponent<Attacking>();
+        animatorModule = GetComponent<Animator>();
     }
 
     private void Update()
@@ -54,9 +59,61 @@ public class PlayerController : MonoBehaviour
         targetingInput.Set(Input.GetAxis(targetingHorizontal), Input.GetAxis(targetingVertical));
 
         // Movement and Dodge
-        movementModule.Move(movementInput, Input.GetButtonDown(dodge));
+        movementModule.Move(movementInput, Input.GetButtonDown(dash));
+        animatorModule.SetFloat("Movement", movementModule.actualMovementSpeedNormalized);
 
-
+        // Shield, Dash, Attack and Sheathe sword.
+        if (Input.GetButtonDown(shield))
+        {
+            movementModule.ChangeSpeeds();
+            animatorModule.ResetTrigger("Shield");
+            animatorModule.SetTrigger("Shield");
+        }
+        else if (Input.GetButtonDown(dash))
+        {
+            animatorModule.ResetTrigger("Dash");
+            animatorModule.SetTrigger("Dash");
+        }
+        else if (Input.GetButtonDown(attack))
+        {
+            int attacknumber = animatorModule.GetInteger("AttackNumber");
+            movementModule.ChangeSpeeds();
+            if (animatorModule.GetCurrentAnimatorStateInfo(0).IsName("Movement"))
+            {
+                animatorModule.ResetTrigger("Attack");
+                animatorModule.SetTrigger("Attack");
+                animatorModule.SetInteger("AttackNumber", 1);
+            }
+            else if (animatorModule.GetCurrentAnimatorStateInfo(0).IsName("Attack_1"))
+            {
+                animatorModule.ResetTrigger("Attack");
+                animatorModule.SetTrigger("Attack");
+                animatorModule.SetInteger("AttackNumber", 2);
+            }
+            else if (animatorModule.GetCurrentAnimatorStateInfo(0).IsName("Attack_2"))
+            {
+                animatorModule.ResetTrigger("Attack");
+                animatorModule.SetTrigger("Attack");
+                animatorModule.SetInteger("AttackNumber", 3);
+            }
+        }
+        else if (Input.GetButtonDown(sheathe))
+        {
+            if (attackingModule.sheathed)
+            {
+                if(attackingModule.overheated)
+                {
+                    return;
+                }
+                attackingModule.Unsheathe();
+                animatorModule.SetBool("Sheathed", false);
+            }
+            else
+            {
+                attackingModule.Sheathe();
+                animatorModule.SetBool("Sheathed", true);
+            }
+        }
     }
 
     public void EnableControls()
@@ -73,5 +130,11 @@ public class PlayerController : MonoBehaviour
         movementModule.DisableMovement();
         movementModule.enabled = false;
         targetingModule.enabled = false;
+    }
+
+    public void ResetAttackCombo()
+    {
+        animatorModule.SetInteger("AttackNumber", 3);
+        animatorModule.ResetTrigger("Attack");
     }
 }
