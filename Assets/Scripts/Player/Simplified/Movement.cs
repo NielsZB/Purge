@@ -11,6 +11,9 @@ public class Movement : MonoBehaviour
     [SerializeField] float dodgeRotationSpeed = 30f;
     [SerializeField] float dodgeDuration = 0.45f;
     [Space(10)]
+    [SerializeField] float attackMovementSpeed;
+    [SerializeField] float attackRotationSpeed;
+    [Space(10)]
     [SerializeField] LayerMask groundMask = new LayerMask();
     [SerializeField] float checkSpacing = 0.25f;
     [SerializeField] float checkYOffset = 0;
@@ -42,9 +45,11 @@ public class Movement : MonoBehaviour
 
     bool movable = true;
 
+    public float actualMovementSpeedNormalized { get; private set; }
+
     private void SetupRigidbody()
     {
-        if(!TryGetComponent(out rb))
+        if (!TryGetComponent(out rb))
         {
             rb = gameObject.AddComponent<Rigidbody>();
         }
@@ -57,6 +62,8 @@ public class Movement : MonoBehaviour
         SetupRigidbody();
         cameraTransform = Camera.main.transform;
         targeting = GetComponent<Targeting>();
+        movementSpeed = normalMovementSpeed;
+        rotationSpeed = normalRotationSpeed;
     }
 
     private void Update()
@@ -83,6 +90,9 @@ public class Movement : MonoBehaviour
         {
             if (direction != Vector3.zero)
             {
+
+                directionRotation = Quaternion.LookRotation(direction);
+
                 transform.rotation = Quaternion.Slerp(
                     transform.rotation,
                     directionRotation,
@@ -101,7 +111,6 @@ public class Movement : MonoBehaviour
         }
 
         rb.velocity = (direction * movementSpeed * inputAmount) + gravity;
-
         updatedGroundPosition.Set(rb.position.x, CalculateAverageGroundPoint().y, rb.position.z);
 
         if (grounded && updatedGroundPosition != rb.position)
@@ -109,6 +118,7 @@ public class Movement : MonoBehaviour
             rb.MovePosition(updatedGroundPosition);
             gravity = Vector3.zero;
         }
+        actualMovementSpeedNormalized = rb.velocity.magnitude.Remap01(0, movementSpeed).Clamped01();
     }
 
     private bool GroundCheck()
@@ -116,18 +126,6 @@ public class Movement : MonoBehaviour
         return Physics.Raycast(transform.position + (Vector3.up * checkYOffset), Vector3.down, checkDistance, groundMask);
     }
 
-    private int GroundCheck(float xOffset, float zOffset)
-    {
-        if (GroundCheck(xOffset, zOffset, out Vector3 temporaryPoint))
-        {
-            combinedGroundPosition += temporaryPoint;
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
-    }
 
     private bool GroundCheck(float xOffset, float zOffset, out Vector3 groundPoint)
     {
@@ -142,10 +140,22 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            Debug.DrawLine(origin, Vector3.down * checkDistance, Color.red);
+            Debug.DrawRay(origin, Vector3.down * checkDistance, Color.red);
 
             groundPoint = Vector3.zero;
             return false;
+        }
+    }
+    private int GroundCheckPoint(float xOffset, float zOffset)
+    {
+        if (GroundCheck(xOffset, zOffset, out Vector3 temporaryPoint))
+        {
+            combinedGroundPosition += temporaryPoint;
+            return 1;
+        }
+        else
+        {
+            return 0;
         }
     }
 
@@ -156,10 +166,10 @@ public class Movement : MonoBehaviour
         GroundCheck(0, 0, out combinedGroundPosition);
 
         groundAverage +=
-            GroundCheck(checkSpacing, 0) +
-            GroundCheck(-checkSpacing, 0) +
-            GroundCheck(0, checkSpacing) +
-            GroundCheck(0, -checkSpacing);
+            GroundCheckPoint(checkSpacing, 0) +
+            GroundCheckPoint(-checkSpacing, 0) +
+            GroundCheckPoint(0, checkSpacing) +
+            GroundCheckPoint(0, -checkSpacing);
 
         return combinedGroundPosition / groundAverage;
     }
@@ -188,6 +198,7 @@ public class Movement : MonoBehaviour
     {
         if (movable)
         {
+
             if (dash)
             {
                 StartCoroutine(DashActive());
@@ -200,6 +211,7 @@ public class Movement : MonoBehaviour
                 {
                     this.input.Set(transform.forward.x, transform.forward.z);
                 }
+
             }
             else
             {
@@ -217,5 +229,17 @@ public class Movement : MonoBehaviour
     {
         movable = false;
         input = Vector2.zero;
+    }
+
+    public void ChangeSpeeds()
+    {
+        movementSpeed = attackMovementSpeed;
+        rotationSpeed = attackRotationSpeed;
+    }
+
+    public void ResetSpeeds()
+    {
+        movementSpeed = normalMovementSpeed;
+        rotationSpeed = normalRotationSpeed;
     }
 }
