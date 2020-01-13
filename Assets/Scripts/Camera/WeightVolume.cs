@@ -30,6 +30,8 @@ public class WeightVolume : MonoBehaviour
     AnimationCurve blendCurve = null;
     [SerializeField, Tooltip("How smooth the weight is changed.")]
     float smoothing = 0.25f;
+    [SerializeField]
+    float outsideSmoothing = 0.5f;
 
     public float Weight { get; private set; }
     public Type VolumeType { get { return type; } }
@@ -120,7 +122,7 @@ public class WeightVolume : MonoBehaviour
         {
             if (HasTarget)
             {
-                Weight = Weight > 0.5f ? Mathf.SmoothStep(Weight, 1, smoothing) : Mathf.SmoothStep(Weight, 0, smoothing);
+                Weight = Weight > 0.5f ? Mathf.SmoothStep(Weight, 1, outsideSmoothing) : Mathf.SmoothStep(Weight, 0, outsideSmoothing);
 
                 if (Weight < 0.001f)
                 {
