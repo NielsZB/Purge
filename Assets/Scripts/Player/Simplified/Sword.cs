@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Sword : MonoBehaviour
 {
+    [SerializeField] FloatVariable HeatValue;
     [SerializeField] float sheathedHeatCooling = 0.2f;
     [SerializeField] float unsheathedHeatCooling = 0.01f;
     [SerializeField] float damage = 5f;
     [SerializeField] AnimationCurve heatDamageCurve = new AnimationCurve();
     [SerializeField] AnimationCurve heatGainCurve = new AnimationCurve();
     [SerializeField] float heatGain = 0.1f;
-    public Slider slider;
     public float Damage
     {
         get
@@ -25,7 +25,7 @@ public class Sword : MonoBehaviour
 
     private void Update()
     {
-        slider.value = Heat;
+        HeatValue.Set(Heat);
         if (Heat > 0)
         {
             if (sheathed)

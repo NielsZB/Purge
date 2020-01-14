@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerDamager : MonoBehaviour
 {
+    public bool active;
     Sword attackingModule;
 
     private void Start()
@@ -13,22 +14,13 @@ public class PlayerDamager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out Health health))
+        if (active)
         {
-
-            health.TakeDamage(attackingModule.Damage);
-            attackingModule.GainHeat();
+            if (other.TryGetComponent(out Health health))
+            {
+                health.TakeDamage(attackingModule.Damage);
+                attackingModule.GainHeat();
+            }
         }
-    }
-
-
-    private void Update()
-    {
-        if (Input.GetButtonDown("X") && !attackingModule.overheated && !attackingModule.sheathed)
-            attack();
-    }
-    public void attack()
-    {
-        attackingModule.GainHeat();
     }
 }

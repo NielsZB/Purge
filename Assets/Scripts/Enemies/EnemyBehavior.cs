@@ -15,13 +15,11 @@ public class EnemyBehavior : MonoBehaviour
 
     PlayerHealth player;
     Animator animator;
-    Damager damager;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        damager = GetComponentInChildren<Damager>(true);
         player = FindObjectOfType<PlayerHealth>();
         MoveTowards(player.transform.position);
     }
@@ -77,15 +75,6 @@ public class EnemyBehavior : MonoBehaviour
     public void Wait()
     {
         StartCoroutine(Waiting());
-    }
-
-    public void EnableDamage()
-    {
-        damager.CanDamage = true;
-    }
-    public void DisableDamage()
-    {
-        damager.CanDamage = false;
     }
     void Attack()
     {

@@ -4,28 +4,15 @@ using UnityEngine;
 
 public class Damager : MonoBehaviour
 {
-    [SerializeField] float damage = 5f;
-    public bool CanDamage = false;
-    public bool HurtsPlayerOnly;
+    [SerializeField] float damage;
+    [SerializeField] bool active;
     private void OnTriggerEnter(Collider other)
     {
-        if (CanDamage)
+        if (active)
         {
-            if (HurtsPlayerOnly)
+            if (other.TryGetComponent(out PlayerHealth playerHealth))
             {
-                if (other.TryGetComponent(out PHealth health))
-                {
-                    Debug.Log(other.gameObject,gameObject);
-                    health.TakeDamage(damage);
-                }
-            }
-            else
-            {
-                if (other.TryGetComponent(out Health health))
-                {
-                    Debug.Log(other.gameObject,gameObject);
-                    health.TakeDamage(damage);
-                }
+                playerHealth.TakeDamage(damage);
             }
         }
     }

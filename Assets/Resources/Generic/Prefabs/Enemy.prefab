@@ -107,8 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  CanDamage: 0
-  HurtsPlayerOnly: 0
+  active: 0
 --- !u!54 &3975130064872356258
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -13,7 +13,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
-        Health.Set(health);
+        CurrentHealth = health;
+        Health.Set(health.Remap01(0f,health));
     }
     public void TakeDamage(float amount)
     {
@@ -21,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         CurrentHealth -= amount;
-        Health.Set(CurrentHealth);
+        Health.Set(CurrentHealth.Remap01(0f, health));
         if(CurrentHealth <= 0)
         {
             IsAlive = false;

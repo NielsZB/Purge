@@ -5,22 +5,10 @@ using UnityEngine;
 public class PAttack : MonoBehaviour
 {
     Animator animator;
-    Damager damager;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        damager = GetComponentInChildren<Damager>();
-    }
-
-    public void EnableDamage()
-    {
-        damager.CanDamage = true;
-    }
-
-    public void DisableDamage()
-    {
-        damager.CanDamage = false;
     }
     public void ResetAttack()
     {
