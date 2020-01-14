@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Resources/Scenes/Temporary/Combat Arena/CombatArena.unity
     guid: 873ed4c6f7288c542ab3b3be62354838
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Temporary/Layout/Grey Boxing Iteration 5.unity
     guid: 49f68a73f2c6fce47901dff1f4d14de9
+  - enabled: 1
+    path: Assets/Resources/Scenes/Environment Scenes/01 Harbour Polish.unity
+    guid: 196f188c34132fb429b76fdd2021f287
   m_configObjects: {}
