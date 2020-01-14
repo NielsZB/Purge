@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public string rightHand = "RB";
     [Space(10)]
     public string dash = "A";
-    public string shield = "B";
+    public string ward = "B";
     public string attack = "X";
     public string sheathe = "Y";
     [Space(10)]
@@ -37,15 +37,19 @@ public class PlayerController : MonoBehaviour
 
     bool controlsEnabled = true;
 
+    PlayerHealth healthModule;
+    Shielding wardModule;
     Movement movementModule;
     Targeting targetingModule;
-    Attacking attackingModule;
+    Sword attackingModule;
     Animator animatorModule;
     private void Start()
     {
+        healthModule = GetComponent<PlayerHealth>();
+        wardModule = GetComponent<Shielding>();
         movementModule = GetComponent<Movement>();
         targetingModule = GetComponent<Targeting>();
-        attackingModule = GetComponent<Attacking>();
+        attackingModule = GetComponent<Sword>();
         animatorModule = GetComponent<Animator>();
     }
 
@@ -63,11 +67,9 @@ public class PlayerController : MonoBehaviour
         animatorModule.SetFloat("Movement", movementModule.actualMovementSpeedNormalized);
 
         // Shield, Dash, Attack and Sheathe sword.
-        if (Input.GetButtonDown(shield))
+        if (Input.GetButtonDown(ward))
         {
-            movementModule.ChangeSpeeds();
-            animatorModule.ResetTrigger("Shield");
-            animatorModule.SetTrigger("Shield");
+            wardModule.Activate();
         }
         else if (Input.GetButtonDown(dash))
         {
@@ -76,6 +78,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetButtonDown(attack))
         {
+            if (attackingModule.sheathed)
+                return;
             int attacknumber = animatorModule.GetInteger("AttackNumber");
             movementModule.ChangeSpeeds();
             if (animatorModule.GetCurrentAnimatorStateInfo(0).IsName("Movement"))
@@ -101,7 +105,7 @@ public class PlayerController : MonoBehaviour
         {
             if (attackingModule.sheathed)
             {
-                if(attackingModule.overheated)
+                if (attackingModule.overheated)
                 {
                     return;
                 }

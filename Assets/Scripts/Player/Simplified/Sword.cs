@@ -1,19 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Attacking : MonoBehaviour
+using UnityEngine.UI;
+public class Sword : MonoBehaviour
 {
-    [SerializeField] float sheathedHeatCooling;
-    [SerializeField] float unsheathedHeatCooling;
-    [SerializeField] float heatGain;
-    public float damage;
+    [SerializeField] float sheathedHeatCooling = 0.2f;
+    [SerializeField] float unsheathedHeatCooling = 0.01f;
+    [SerializeField] float damage = 5f;
+    [SerializeField] AnimationCurve heatDamageCurve = new AnimationCurve();
+    [SerializeField] AnimationCurve heatGainCurve = new AnimationCurve();
+    [SerializeField] float heatGain = 0.1f;
+    public Slider slider;
+    public float Damage
+    {
+        get
+        {
+            return damage * heatDamageCurve.Evaluate(Heat);
+        }
+    }
+
     public float Heat { get; private set; }
-    public bool sheathed { get; private set; }
+    public bool sheathed { get; private set; } = true;
     public bool overheated { get; private set; }
 
     private void Update()
     {
+        slider.value = Heat;
         if (Heat > 0)
         {
             if (sheathed)
@@ -29,6 +41,7 @@ public class Attacking : MonoBehaviour
             }
         }
 
+
         if (overheated && Heat < 0)
         {
             overheated = false;
@@ -37,7 +50,7 @@ public class Attacking : MonoBehaviour
 
     public void GainHeat()
     {
-        Heat += heatGain;
+        Heat += heatGain * heatGainCurve.Evaluate(Heat);
         if (Heat > 1)
         {
             Overcharge();
@@ -48,6 +61,7 @@ public class Attacking : MonoBehaviour
     {
         overheated = true;
     }
+
     public void Sheathe()
     {
         sheathed = true;

@@ -4,23 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UIHealth : MonoBehaviour
 {
-    Text healthIndicator;
+    [SerializeField] float maxHealth;
+    Slider healthIndicator;
     [SerializeField] FloatVariable playerHealth;
     private void Start()
     {
-        healthIndicator = GetComponent<Text>();
+        healthIndicator = GetComponent<Slider>();
+        healthIndicator.maxValue = maxHealth;
     }
 
     private void Update()
     {
         if (playerHealth.Value > 0)
         {
-            healthIndicator.text = playerHealth.Value.ToString();
-        }
-        else
-        {
-            healthIndicator.color = Color.red;
-            healthIndicator.text = "Dead";
+            healthIndicator.value = playerHealth.Value;
         }
     }
 }
