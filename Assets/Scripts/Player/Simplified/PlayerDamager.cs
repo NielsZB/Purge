@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class PlayerDamager : MonoBehaviour
 {
-    float damage;
-    
-    Attacking attackingModule;
+    Sword attackingModule;
+
     private void Start()
     {
-        attackingModule = GetComponentInParent<Attacking>();
-        damage = attackingModule.damage;
+        attackingModule = GetComponentInParent<Sword>();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent(out Health health))
         {
-            health.TakeDamage(damage);
+
+            health.TakeDamage(attackingModule.Damage);
             attackingModule.GainHeat();
         }
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("X") && !attackingModule.overheated && !attackingModule.sheathed)
+            attack();
+    }
+    public void attack()
+    {
+        attackingModule.GainHeat();
     }
 }

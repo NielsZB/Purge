@@ -13,7 +13,7 @@ public class EnemyBehavior : MonoBehaviour
     public bool hasAttacked { get; private set; } = false;
 
 
-    PHealth player;
+    PlayerHealth player;
     Animator animator;
     Damager damager;
 
@@ -22,7 +22,7 @@ public class EnemyBehavior : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         damager = GetComponentInChildren<Damager>(true);
-        player = FindObjectOfType<PHealth>();
+        player = FindObjectOfType<PlayerHealth>();
         MoveTowards(player.transform.position);
     }
 
@@ -33,7 +33,7 @@ public class EnemyBehavior : MonoBehaviour
     }
     private void Update()
     {
-        if (!player.IsDead && agent.enabled)
+        if (!player.IsAlive && agent.enabled)
         {
             if (hasAttacked)
             {
@@ -76,7 +76,6 @@ public class EnemyBehavior : MonoBehaviour
 
     public void Wait()
     {
-        Debug.Log("Wait!");
         StartCoroutine(Waiting());
     }
 

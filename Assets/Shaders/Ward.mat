@@ -26,11 +26,11 @@ Material:
     m_TexEnvs: []
     m_Floats:
     - Vector1_182F92AE: 0.01
-    - Vector1_26DA4C80: -1
-    - Vector1_378599A8: 0.36
-    - Vector1_77DE1906: 8.86
-    - Vector1_A9865108: 2.15
-    - Vector1_D3C1C71B: 0.6
+    - Vector1_26DA4C80: -0.47
+    - Vector1_378599A8: 0.5
+    - Vector1_77DE1906: 4.14
+    - Vector1_A9865108: 0
+    - Vector1_D3C1C71B: 0.03
     - Vector1_D5A164D5: -1
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
@@ -68,4 +68,4 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissiveColor: {r: 127.999985, g: 60.984287, b: 42.89005, a: 1}
+    - _EmissiveColor: {r: 95.87451, g: 45.678432, b: 32.125492, a: 1}
