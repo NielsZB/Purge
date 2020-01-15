@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class TutorialPrompt : MonoBehaviour
 {
+    public GameObject Violet;
     MeshRenderer prompt;
+    public bool violetInRange = false;
     public bool done = false;
-    public float waitBeforeFading = 1f;
-    public float fadeDuration = 2f;
+    public float waitBeforeFading = .1f;
+    public float fadeDuration = 4f;
+    Collider [] collidersInRange;
+    public float violetCheckingRange = 5f;
+    float distanceFromViolet;
+    
     // Start is called before the first frame update
     void Start()
     {
-        prompt = GetComponent<MeshRenderer>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetAxis("LeftHorizontal") > 0 && !done){
-            StartCoroutine(fadeAway());
-            done = true;
-        }
+    prompt = GetComponent<MeshRenderer>();
     }
 
     IEnumerator fadeAway(){
@@ -30,6 +27,37 @@ public class TutorialPrompt : MonoBehaviour
             t += Time.deltaTime / fadeDuration;
             prompt.material.SetFloat("_Alpha", Mathf.Lerp(1, 0, t));
         yield return null;
+        }
+    }
+
+    public bool checkIfinRange(){
+        /*collidersInRange = Physics.OverlapSphere(transform.position, violetCheckingRange, 10);
+
+        if(collidersInRange.Length>0){
+            foreach(Collider other in collidersInRange){
+                Debug.Log(other.gameObject.layer);
+                if(other.gameObject.layer == 10){
+                    violetInRange = true;
+                }
+                else{
+                    violetInRange = false;
+                }
+            }
+        }*/
+
+        distanceFromViolet = Vector3.Distance(transform.position, Violet.transform.position);
+
+        if(distanceFromViolet <= violetCheckingRange){
+            return true;
+        }
+        else
+        return false;
+    }
+
+    public void checkConditions(){
+        if(!done){
+            StartCoroutine(fadeAway());
+            done = true;
         }
     }
 }
