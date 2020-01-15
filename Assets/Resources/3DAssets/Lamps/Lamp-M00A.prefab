@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1954797317}
   - component: {fileID: 1954797316}
   - component: {fileID: 1954797315}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 1400371265801284091}
   - component: {fileID: 1400371265801284088}
   - component: {fileID: 1400371265801284089}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,8 +238,8 @@ Light:
   serializedVersion: 9
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 23.873241
-  m_Range: 0.58304465
+  m_Intensity: 11.936621
+  m_Range: 0.8602724
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -319,14 +319,14 @@ MonoBehaviour:
   shapeWidth: 0.5
   shapeHeight: 0.5
   aspectRatio: 1
-  shapeRadius: 0
+  shapeRadius: 0.15
   maxSmoothness: 0.99
   applyRangeAttenuation: 1
   useOldInspector: 0
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
-  displayLightIntensity: 300
+  displayLightIntensity: 150
   displayAreaLightEmissiveMesh: 0
   areaLightCookie: {fileID: 0}
   areaLightShadowCone: 120
@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 1400371267180444684}
   - component: {fileID: 1400371267180444686}
   - component: {fileID: 1400371267180444687}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5152,7 +5152,7 @@ GameObject:
   - component: {fileID: 6203052016233336348}
   - component: {fileID: 3120621045373269034}
   - component: {fileID: 8679040276311771347}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Lamp-M00A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
