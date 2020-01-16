@@ -13,6 +13,8 @@ public class Shielding : MonoBehaviour
     PlayerHealth healthModule;
     WardScriptTest pushback;
     Animator animatorModule;
+    public float Stamina{get;private set;}
+    
     private void Start()
     {
         healthModule = GetComponent<PlayerHealth>();
@@ -39,5 +41,9 @@ public class Shielding : MonoBehaviour
         }
         healthModule.DisableInvulnerability();
         ward.gameObject.SetActive(false);
+    }
+
+    public void ResetStamina(){
+        Stamina = 1;
     }
 }

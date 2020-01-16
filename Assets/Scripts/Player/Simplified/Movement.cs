@@ -134,7 +134,7 @@ public class Movement : MonoBehaviour
         if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, checkDistance, groundMask))
         {
             Debug.DrawLine(origin, hit.point, Color.green);
-
+            //Debug.Log("standing on" + hit.collider.gameObject, hit.collider.gameObject);
             groundPoint = hit.point;
             return true;
         }

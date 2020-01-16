@@ -38,4 +38,8 @@ public class PlayerHealth : MonoBehaviour
     {
         IsInvulnerable = false;
     }
+
+    public void ResetHealth(){
+        CurrentHealth = health;
+    }
 }

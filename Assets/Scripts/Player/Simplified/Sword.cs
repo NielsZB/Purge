@@ -71,4 +71,8 @@ public class Sword : MonoBehaviour
     {
         sheathed = false;
     }
+
+    public void ResetHeat(){
+        Heat = 0;
+    }
 }
