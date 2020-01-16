@@ -6,9 +6,19 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float health;
 
-    public float currentHealth { get; private set; }
+    public bool IsAlive { get; private set; } = true;
+    public float CurrentHealth { get; private set; }
+
+    private void Start()
+    {
+        CurrentHealth = health;
+    }
     public void TakeDamage(float amount)
     {
-
+        CurrentHealth -= amount;
+        if(CurrentHealth < 0)
+        {
+            IsAlive = false;
+        }
     }
 }

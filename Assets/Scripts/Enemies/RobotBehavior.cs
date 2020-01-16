@@ -1,0 +1,161 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class RobotBehavior : MonoBehaviour
+{
+    public Transform PLAYER;
+    public bool IsActive { get; private set; }
+    public bool IsWaiting { get; private set; }
+    public bool IsMoving { get; private set; }
+    public bool IsAttacking { get; private set; }
+    public bool TrackingWhileAttacking { get; private set; }
+    public bool HasTarget { get { return target != null; } }
+
+    bool inRangeOfTarget
+    {
+        get
+        {
+            if (agent == null)
+            {
+                return false;
+            }
+            if ((transform.position - target.position).sqrMagnitude <= agent.stoppingDistance * agent.stoppingDistance)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+    float normalizedSpeed
+    {
+        get
+        {
+            return agent.velocity.magnitude.Remap01(0, agent.speed);
+        }
+    }
+
+    Transform target;
+    NavMeshAgent agent;
+    Animator animator;
+
+    private void Start()
+    {
+        agent = GetComponentInParent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+
+        if (IsActive)
+        {
+            if (TrackingWhileAttacking && HasTarget)
+            {
+                Debug.Log("Tracking!");
+                RotateTowardsTarget();
+            }
+
+            if (IsWaiting)
+                return;
+
+            animator.SetFloat("Movement", normalizedSpeed);
+
+            if (HasTarget)
+            {
+                if (inRangeOfTarget)
+                {
+                    if (!IsAttacking)
+                    {
+                        Attack();
+                    }
+
+                    
+                }
+                else
+                {
+                    MoveTowards(target.position);
+                }
+            }
+        }
+    }
+
+    public void Activate()
+    {
+        IsActive = true;
+        SetTarget(PLAYER);
+    }
+
+    public void Deactivate()
+    {
+        IsActive = false;
+    }
+
+    public void Wait()
+    {
+        agent.isStopped = true;
+        IsWaiting = true;
+    }
+
+    public void Wait(float duration)
+    {
+        Wait();
+        StartCoroutine(Waiting(duration));
+    }
+
+    public void RotateTowardsTarget()
+    {
+        Debug.DrawRay(agent.transform.position, target.position - agent.transform.position);
+        agent.transform.rotation = Quaternion.Slerp(
+            agent.transform.rotation,
+            Quaternion.LookRotation(target.position - transform.position),
+            5f * Time.deltaTime);
+    }
+
+    public void StopTrackingWhileAttacking()
+    {
+        TrackingWhileAttacking = false;
+    }
+    public void StopWaiting()
+    {
+        IsWaiting = false;
+        agent.isStopped = false;
+    }
+
+    public void MoveTowards(Vector3 position)
+    {
+        IsMoving = true;
+        agent.destination = position;
+    }
+
+    public void Attack()
+    {
+        TrackingWhileAttacking = true;
+        animator.SetTrigger("Attack");
+        Wait();
+    }
+
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
+    }
+
+    IEnumerator Waiting(float duration)
+    {
+        float t = 0;
+
+        while (t < 1)
+        {
+            t += Time.deltaTime / duration;
+
+            yield return null;
+        }
+        IsWaiting = false;
+        IsAttacking = false; 
+    }
+}

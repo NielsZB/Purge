@@ -14,6 +14,10 @@ public class Damager : MonoBehaviour
             {
                 playerHealth.TakeDamage(damage);
             }
+            else if(other.TryGetComponent(out EnemyHealth enemyHealth))
+            {
+                enemyHealth.TakeDamage(damage);
+            }
         }
     }
 }
