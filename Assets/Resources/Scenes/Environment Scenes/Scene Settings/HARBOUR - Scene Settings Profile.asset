@@ -1,5 +1,47 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8902387207244713077
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf384b154398e341b6b29969c078198, type: 3}
+  m_Name: MotionBlur
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  sampleCount:
+    m_OverrideState: 1
+    m_Value: 8
+    min: 2
+  intensity:
+    m_OverrideState: 1
+    m_Value: 1
+    min: 0
+  maximumVelocity:
+    m_OverrideState: 1
+    m_Value: 200
+    min: 0
+    max: 1500
+  minimumVelocity:
+    m_OverrideState: 1
+    m_Value: 2
+    min: 0
+    max: 64
+  cameraRotationVelocityClamp:
+    m_OverrideState: 0
+    m_Value: 0.03
+    min: 0
+    max: 0.2
+  depthComparisonExtent:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 20
 --- !u!114 &-6944219871067950113
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -63,6 +105,33 @@ MonoBehaviour:
   resolution:
     m_OverrideState: 0
     m_Value: 2
+--- !u!114 &-6281115827610048021
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598e2d32e2c7b0c418e030c3236d663a, type: 3}
+  m_Name: ChromaticAberration
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  spectralLut:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.045
+    min: 0
+    max: 1
+  maxSamples:
+    m_OverrideState: 1
+    m_Value: 8
+    min: 3
+    max: 24
 --- !u!114 &-5516798868415955372
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -236,6 +305,8 @@ MonoBehaviour:
   - {fileID: 4014917547996679362}
   - {fileID: 6283756078318919007}
   - {fileID: 2690856331521606500}
+  - {fileID: -6281115827610048021}
+  - {fileID: -8902387207244713077}
 --- !u!114 &2211435815265337927
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -343,7 +414,7 @@ MonoBehaviour:
     m_Value: -0.59
   contrast:
     m_OverrideState: 1
-    m_Value: 36.4
+    m_Value: 45.4
     min: -100
     max: 100
   colorFilter:
@@ -402,7 +473,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   rotation:
     m_OverrideState: 1
-    m_Value: 297
+    m_Value: 294
     min: 0
     max: 360
   skyIntensityMode:
