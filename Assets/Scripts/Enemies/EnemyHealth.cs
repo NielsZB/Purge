@@ -29,7 +29,7 @@ public class EnemyHealth : MonoBehaviour
         if (CurrentHealth < 0)
         {
             IsAlive = false;
-
+            GetComponent<CapsuleCollider>().enabled = false;
             agent.enabled = false;
             animator.SetTrigger("Killed");
         }
