@@ -24,7 +24,7 @@ public class Shielding : MonoBehaviour
     public void Activate()
     {
         StartCoroutine(Warding());
-        pushback.BlastOff();
+        pushback.Push();
     }
 
     IEnumerator Warding()

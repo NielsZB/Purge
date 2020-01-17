@@ -13,6 +13,7 @@ public class RobotBehavior : MonoBehaviour
     public bool TrackingWhileAttacking { get; private set; }
     public bool HasTarget { get { return target != null; } }
 
+
     bool inRangeOfTarget
     {
         get
@@ -43,21 +44,21 @@ public class RobotBehavior : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
     Animator animator;
+    EnemyHealth health;
 
     private void Start()
     {
         agent = GetComponentInParent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        health = GetComponent<EnemyHealth>();
     }
 
     private void Update()
     {
-
         if (IsActive)
         {
             if (TrackingWhileAttacking && HasTarget)
             {
-                Debug.Log("Tracking!");
                 RotateTowardsTarget();
             }
 
@@ -75,7 +76,7 @@ public class RobotBehavior : MonoBehaviour
                         Attack();
                     }
 
-                    
+
                 }
                 else
                 {
@@ -110,7 +111,6 @@ public class RobotBehavior : MonoBehaviour
 
     public void RotateTowardsTarget()
     {
-        Debug.DrawRay(agent.transform.position, target.position - agent.transform.position);
         agent.transform.rotation = Quaternion.Slerp(
             agent.transform.rotation,
             Quaternion.LookRotation(target.position - transform.position),
@@ -135,8 +135,18 @@ public class RobotBehavior : MonoBehaviour
 
     public void Attack()
     {
-        TrackingWhileAttacking = true;
-        animator.SetTrigger("Attack");
+
+        int attackRandomizer = Random.Range(0, 10);
+
+        if (attackRandomizer <= 3)
+        {
+            animator.SetTrigger("Shock");
+        }
+        else
+        {
+            TrackingWhileAttacking = true;
+            animator.SetTrigger("Attack");
+        }
         Wait();
     }
 
@@ -145,6 +155,15 @@ public class RobotBehavior : MonoBehaviour
         this.target = target;
     }
 
+    public void EnableStun()
+    {
+        health.IsStunable = true;
+    }
+
+    public void DisableStun()
+    {
+        health.IsStunable = false;
+    }
     IEnumerator Waiting(float duration)
     {
         float t = 0;
@@ -156,6 +175,6 @@ public class RobotBehavior : MonoBehaviour
             yield return null;
         }
         IsWaiting = false;
-        IsAttacking = false; 
+        IsAttacking = false;
     }
 }

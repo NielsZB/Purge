@@ -90,13 +90,13 @@ public class EnemyBehavior : MonoBehaviour
     IEnumerator Waiting()
     {
         ReadyToAttack = false;
-        float waitTime = Random.Range(attackWaitTimeRange.x, attackWaitTimeRange.y);
+        float duration = Random.Range(attackWaitTimeRange.x, attackWaitTimeRange.y);
 
         float t = 0;
 
         while (t < 1)
         {
-            t += Time.deltaTime / waitTime;
+            t += Time.deltaTime / duration;
 
             yield return null;
         }
