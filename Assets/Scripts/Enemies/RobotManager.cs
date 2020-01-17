@@ -5,32 +5,32 @@ using UnityEngine;
 public class RobotManager : MonoBehaviour
 {
     [Header("Wave times")]
-    public float FirstWaveLength;
-    public float FirstWaveSize;
+    public int FirstWaveLength;
+    public int FirstWaveSize;
     public bool FirstWaveDone = false;
-    public float SecondWaveLength;
-    public float SecondWaveSize;
+    public int SecondWaveLength;
+    public int SecondWaveSize;
     public bool SecondWaveDone = false;
-    public float ThirdWaveLength;
-    public float ThirdWaveSize;
+    public int ThirdWaveLength;
+    public int ThirdWaveSize;
     public bool ThirdWaveDone = false;
-    public float FourthWaveLength;
-    public float FourthWaveSize;
-    public bool FourthdWaveDone = false;
+    public int FourthWaveLength;
+    public int FourthWaveSize;
+    public bool FourthWaveDone = false;
     [Space(20)]
 
     GameObject [] spawnPointsGO;
     Transform [] robotSpawnPoints;
 
     public GameObject robotPrefab;
+    public GameObject FirstRobotToSlay;
     
-    List <GameObject> aliveRobots;
+    public List <GameObject> aliveRobots;
 
     [Header("Robots Data")]
     [SerializeField]
-    float timeLeft;
-    [SerializeField]
-    float robotsLeft;
+    static float timeLeft;
+    public bool respawnOnce = false;
 
     void Start(){
         spawnPointsGO = GameObject.FindGameObjectsWithTag("SpawnPoint");
@@ -38,10 +38,12 @@ public class RobotManager : MonoBehaviour
         for(int i = 0; i < spawnPointsGO.Length; i ++){
             robotSpawnPoints [i] = spawnPointsGO[i].transform; 
         }
-        spawnWave(3, 1);
+        aliveRobots.Add(FirstRobotToSlay);
     }
 
-
+    void Update(){
+        checkCombatStates();
+    }
 
     public void spawnWave(int waveSize, int waveLength){       
         
@@ -63,10 +65,72 @@ public class RobotManager : MonoBehaviour
         
         if(waveSize<=spawnPointsGO.Length){
             for(int i = 0; i < waveSize; i++){
-                Instantiate(robotPrefab, robotSpawnPoints[deck[i]]);
+                aliveRobots.Add(Instantiate(robotPrefab, robotSpawnPoints[deck[i]]));
             }         
         }
         else
         Debug.Log("More enemies than spawn points error");
+    }
+
+     public void StartCombat(){
+        StartCoroutine(startTheTimer());
+        spawnWave(FirstWaveSize, FirstWaveLength);
+    }
+
+    public void RestartCombat(){
+        StopCoroutine(startTheTimer());
+        removeAllRobots();
+        StartCoroutine(startTheTimer());
+        FirstWaveDone = false;
+        SecondWaveDone = false;
+        ThirdWaveDone = false;
+        FourthWaveDone = false;
+    }
+
+    IEnumerator startTheTimer(){
+        while(true){
+            timeLeft = Time.deltaTime;
+            Debug.Log(timeLeft);
+            yield return null;
+        }
+    }
+
+    void removeAllRobots(){
+        foreach(GameObject go in aliveRobots){
+            aliveRobots.Remove(go);
+            Destroy(go);
+        }
+    }
+
+    void checkCombatStates(){
+        if(aliveRobots.Count== 0){
+            respawnOnce = true;
+        }
+        if(aliveRobots.Count==0 && respawnOnce){
+            spawnWave(SecondWaveSize, SecondWaveLength);
+            respawnOnce = false;
+            FirstWaveDone = true;
+        }
+
+        if(aliveRobots.Count==0 && FirstWaveDone && respawnOnce){
+            spawnWave(ThirdWaveSize, ThirdWaveLength);
+            respawnOnce = false;
+            SecondWaveDone = true;
+        }
+
+        if(aliveRobots.Count==0 && FirstWaveDone && SecondWaveDone && respawnOnce){
+            spawnWave(FourthWaveSize, FourthWaveLength);
+            respawnOnce = false;
+            ThirdWaveDone = true;
+        }
+
+        if(aliveRobots.Count==0 && FirstWaveDone && SecondWaveDone && ThirdWaveDone && respawnOnce){
+            respawnOnce = false;
+            FourthWaveDone = true;
+        }
+    }
+
+    public void removeRobot(GameObject go){
+        aliveRobots.Remove(go);
     }
 }

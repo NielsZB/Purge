@@ -19,7 +19,7 @@ TagManager:
   - Obstacles
   - Player
   - Ward
-  - Danger
+  - Enemies
   - Pushable
   - 
   - Camera Rig
