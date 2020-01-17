@@ -25,7 +25,9 @@ public class Sword : MonoBehaviour
 
     private void Update()
     {
-        HeatValue.Set(Heat);
+        if(HeatValue!=null){
+            HeatValue.Set(Heat);
+        }
         if (Heat > 0)
         {
             if (sheathed)

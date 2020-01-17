@@ -22,7 +22,9 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         CurrentHealth -= amount;
-        Health.Set(CurrentHealth.Remap01(0f, health));
+        if(Health!=null){
+            Health.Set(CurrentHealth.Remap01(0f, health));
+        }
         if(CurrentHealth <= 0)
         {
             IsAlive = false;
