@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class RobotBehavior : MonoBehaviour
 {
-    public Transform PLAYER;
     public bool IsActive { get; private set; }
     public bool IsWaiting { get; private set; }
     public bool IsMoving { get; private set; }
@@ -50,12 +49,12 @@ public class RobotBehavior : MonoBehaviour
     {
         agent = GetComponentInParent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        health = GetComponent<EnemyHealth>();
+        health = GetComponentInParent<EnemyHealth>();
     }
 
     private void Update()
     {
-        if (IsActive)
+        if (IsActive && health.IsAlive)
         {
             if (TrackingWhileAttacking && HasTarget)
             {
@@ -89,7 +88,6 @@ public class RobotBehavior : MonoBehaviour
     public void Activate()
     {
         IsActive = true;
-        SetTarget(PLAYER);
     }
 
     public void Deactivate()
@@ -124,7 +122,10 @@ public class RobotBehavior : MonoBehaviour
     public void StopWaiting()
     {
         IsWaiting = false;
-        agent.isStopped = false;
+        if (agent.isOnNavMesh)
+        {
+            agent.isStopped = false;
+        }
     }
 
     public void MoveTowards(Vector3 position)
