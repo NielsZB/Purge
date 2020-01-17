@@ -30,6 +30,8 @@ public class EnemyHealth : MonoBehaviour
         {
             IsAlive = false;
             GetComponent<CapsuleCollider>().enabled = false;
+            GetComponentInChildren <RobotBehavior>().enabled = false;
+
             agent.enabled = false;
             animator.SetTrigger("Killed");
         }
