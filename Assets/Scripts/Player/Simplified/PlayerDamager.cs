@@ -16,7 +16,7 @@ public class PlayerDamager : MonoBehaviour
     {
         if (active)
         {
-            if (other.TryGetComponent(out Health health))
+            if (other.TryGetComponent(out EnemyHealth health))
             {
                 health.TakeDamage(attackingModule.Damage);
                 attackingModule.GainHeat();
