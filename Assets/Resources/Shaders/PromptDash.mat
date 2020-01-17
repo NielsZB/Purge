@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WorldSpacePrompt
+  m_Name: PromptDash
   m_Shader: {fileID: -6465566751694194690, guid: c0bfcf2e2a6477340bc10022fcb99964,
     type: 3}
   m_ShaderKeywords: 
@@ -23,7 +23,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_D5B7CF9B:
-        m_Texture: {fileID: 2800000, guid: 3de3575f57062e34a81c08988e952f11, type: 3}
+        m_Texture: {fileID: 2800000, guid: 14dc864962d3d4d419b51dbb6396bb30, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
