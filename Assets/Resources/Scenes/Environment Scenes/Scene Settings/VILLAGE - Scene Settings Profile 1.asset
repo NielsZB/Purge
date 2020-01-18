@@ -230,10 +230,10 @@ MonoBehaviour:
   m_AdvancedMode: 0
   postExposure:
     m_OverrideState: 1
-    m_Value: -0.44
+    m_Value: -0.58
   contrast:
     m_OverrideState: 1
-    m_Value: 44.5
+    m_Value: 68.7
     min: -100
     max: 100
   colorFilter:
@@ -369,11 +369,11 @@ MonoBehaviour:
     min: 0.1
   nearFocusStart:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
     min: 0
   nearFocusEnd:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 1
     min: 0
   farFocusStart:
     m_OverrideState: 1
