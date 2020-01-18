@@ -18,6 +18,7 @@ public class UIRestart : MonoBehaviour
     {
         if (playerHealth.Value <= 0)
         {
+            Time.timeScale = 0.5f;
             restartIndicator.enabled = true;
 
             if(Input.GetButtonDown("Start"))
