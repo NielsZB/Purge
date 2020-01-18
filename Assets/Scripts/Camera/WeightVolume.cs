@@ -162,7 +162,7 @@ public class WeightVolume : MonoBehaviour
         }
         else
         {
-            distance = path.FindClosestPoint(target.position, 0, -1, 10);
+            distance = path.FindClosestPoint(target.position, 0, 1, 10);
 
             distance = blendCurve.Evaluate(distance.Remap01(0f, blendRange));
         }
