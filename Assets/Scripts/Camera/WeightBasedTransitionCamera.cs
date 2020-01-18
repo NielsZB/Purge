@@ -15,7 +15,11 @@ public class WeightBasedTransitionCamera : MonoBehaviour
     private void Start()
     {
         volume = GetComponent<WeightVolume>();
-        mixer = (CinemachineMixingCamera)gameObject.AddComponent(typeof(CinemachineMixingCamera));
+
+        if (mixer == null)
+        {
+            mixer = (CinemachineMixingCamera)gameObject.AddComponent(typeof(CinemachineMixingCamera));
+        }
         mixer.Priority = 99;
         mixer.enabled = false;
 
@@ -72,6 +76,10 @@ public class WeightBasedTransitionCamera : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (mixer == null)
+        {
+            mixer = (CinemachineMixingCamera)gameObject.AddComponent(typeof(CinemachineMixingCamera));
+        }
         mixer.enabled = true;
 
         float weight = volume.GetWeight();
