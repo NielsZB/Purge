@@ -49,7 +49,6 @@ public class RespawnCheckpoint : MonoBehaviour
     }
 
     IEnumerator startFadeOut(){
-        Debug.Log("Coroutine Called");
         fadeOutAnimator.SetBool("Dead", true);
         yield return new WaitForSeconds(fadeOutAnimator.GetCurrentAnimatorStateInfo(0).length);
         _playerhealth.ResetHealth();
