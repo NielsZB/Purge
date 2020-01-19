@@ -19,13 +19,16 @@ public class Sword : MonoBehaviour
         }
     }
 
+    public float StandardDamage { get { return damage; } }
+
     public float Heat { get; private set; }
     public bool sheathed { get; private set; } = true;
     public bool overheated { get; private set; }
 
     private void Update()
     {
-        if(HeatValue!=null){
+        if (HeatValue != null)
+        {
             HeatValue.Set(Heat);
         }
         if (Heat > 0)
@@ -74,7 +77,8 @@ public class Sword : MonoBehaviour
         sheathed = false;
     }
 
-    public void ResetHeat(){
+    public void ResetHeat()
+    {
         Heat = 0;
     }
 }

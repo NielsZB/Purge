@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDamager : MonoBehaviour
 {
     public bool active;
+    public bool swordAttack;
     Sword attackingModule;
 
     private void Start()
@@ -18,8 +19,16 @@ public class PlayerDamager : MonoBehaviour
         {
             if (other.TryGetComponent(out EnemyHealth health))
             {
+                if(swordAttack)
+                {
                 health.TakeDamage(attackingModule.Damage);
                 attackingModule.GainHeat();
+                }
+                else
+                {
+                    health.TakeDamage(attackingModule.StandardDamage);
+
+                }
             }
         }
     }
