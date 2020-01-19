@@ -11,12 +11,15 @@ public class Spawner : MonoBehaviour
     [MinMaxSlider(5f, 20f)] public Vector2 waitTimeRange;
     private void Start()
     {
-        StartCoroutine(SpawnTimer());
+        if (spawning)
+        {
+            StartCoroutine(SpawnTimer());
+        }
     }
 
     public void StartSpawning()
     {
-        if (!spawning)
+        if (spawning)
         {
             StartCoroutine(SpawnTimer());
             spawning = true;
