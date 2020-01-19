@@ -57,7 +57,7 @@ public class WardScriptTest : MonoBehaviour
                 float distance = (rigidbody.position - transform.position).magnitude;
                 Vector3 direction = (rigidbody.position - transform.position).normalized;
 
-                rigidbody.AddForce(direction * distance.Remap01(wardRange, 0) * wardForce + (Vector3.up * wardUpForce));
+                rigidbody.AddForce(direction * wardForce + (Vector3.up * wardUpForce));
                 rigidbody.AddTorque(Random.insideUnitSphere * wardForce, ForceMode.Impulse);
                 StartCoroutine(FreezeTimer(rigidbody));
             }
@@ -85,6 +85,7 @@ public class WardScriptTest : MonoBehaviour
     {
         yield return new WaitForSeconds(.2f);
 
+        rigidbody.useGravity = false;
         float current_drag = 0;
         float current_angularDrag = 0;
 
