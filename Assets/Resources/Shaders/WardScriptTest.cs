@@ -85,6 +85,7 @@ public class WardScriptTest : MonoBehaviour
     {
         yield return new WaitForSeconds(.2f);
 
+        rigidbody.useGravity = false;
         float current_drag = 0;
         float current_angularDrag = 0;
 
