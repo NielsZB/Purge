@@ -10,11 +10,12 @@ public class PromptAtack : MonoBehaviour
     RobotBehavior _robotBehaviour;
     public RobotManager _robotManager;
     bool playonce = false;
+    public TutorialPrompt _drawSheathe;
     // Start is called before the first frame update
     void Start()
     {
         instanceOfPrompt = GetComponent<TutorialPrompt>();
-        _robotBehaviour = robot.GetComponent<RobotBehavior>();
+        _robotBehaviour = robot.GetComponentInChildren<RobotBehavior>();
     }
 
     // Update is called once per frame
@@ -25,6 +26,7 @@ public class PromptAtack : MonoBehaviour
             _robotBehaviour.SetTarget(Violet);
             _robotBehaviour.Activate();
             playonce = true;
+            _drawSheathe.checkConditions();
         }
     }
 }
