@@ -25,13 +25,14 @@ public class RobotManager : MonoBehaviour
     public GameObject robotPrefab;
     public GameObject FirstRobotToSlay;
     
-    public List <GameObject> aliveRobots;
+    public List <GameObject> aliveRobots = new List<GameObject>();
+    public List <GameObject> deadRobots = new List<GameObject>();
 
     public Transform Violet;
+    public IEnumerator timecounter;
 
     [Header("Robots Data")]
-    [SerializeField]
-    static float timeLeft;
+    static float timeLeft = 5f;
     public bool respawnOnce = false;
 
     void Start(){
@@ -44,12 +45,15 @@ public class RobotManager : MonoBehaviour
     }
 
     void Update(){
-        checkCombatStates();
         checkRobothealth();
+        checkCombatStates();
     }
 
-    void spawnWave(int waveSize, int waveLength){       
-        
+    void spawnWave(int waveSize, int waveLength){
+        StopAllCoroutines();
+        timecounter = restartTheTimer(waveLength);
+        StartCoroutine(timecounter);
+
         //Randomly populated array
         int count = robotSpawnPoints.Length;
         int[] deck = new int[count];
@@ -64,7 +68,7 @@ public class RobotManager : MonoBehaviour
         
         if(waveSize<=spawnPointsGO.Length){
             for(int i = 0; i < waveSize; i++){
-                GameObject addedRobot = Instantiate(robotPrefab, robotSpawnPoints[deck[i]]);
+                GameObject addedRobot= Instantiate(robotPrefab, robotSpawnPoints[deck[i]].position, robotSpawnPoints[deck[i]].rotation) as GameObject;
                 addedRobot.GetComponentInChildren<RobotBehavior>().SetTarget(Violet);
                 aliveRobots.Add(addedRobot);
             }         
@@ -75,55 +79,71 @@ public class RobotManager : MonoBehaviour
     }
 
     public void RestartCombat(){
-        StopCoroutine(startTheTimer());
-        StartCoroutine(startTheTimer());
-        removeAllRobots();
         FirstWaveDone = false;
         SecondWaveDone = false;
         ThirdWaveDone = false;
         FourthWaveDone = false;
+        removeAllRobots();
+        StopAllCoroutines();
+        timeLeft = 5f;
     }
 
-    IEnumerator startTheTimer(){
+    IEnumerator restartTheTimer(float _waveLength){
+        timeLeft = _waveLength;
         while(true){
-            timeLeft = Time.deltaTime;
+            timeLeft -= Time.deltaTime;
             Debug.Log(timeLeft);
             yield return null;
         }
     }
 
     void removeAllRobots(){
-        foreach(GameObject go in aliveRobots){
-            aliveRobots.Remove(go);
-            Destroy(go);
+        if(aliveRobots.Count>0){
+            for(int i = 0; i < aliveRobots.Count; i++){
+                GameObject go = aliveRobots[i];
+                removeRobot(aliveRobots[i]);
+                Destroy(go);
+            }
+
+            for(int i = 0; i < deadRobots.Count; i++){
+                GameObject go1 = deadRobots[i];
+                removeRobot(deadRobots[i]);
+                Destroy(go1);
+            }
         }
     }
 
     void checkCombatStates(){
-        if(aliveRobots.Count == 0){
+        if(aliveRobots.Count == 0 || timeLeft<=0){
             respawnOnce = true;
         }
-        if(aliveRobots.Count == 0 && respawnOnce){
-            spawnWave(SecondWaveSize, SecondWaveLength);
+
+        if(respawnOnce && !FirstWaveDone){
+            Debug.Log("First Wave spawned");
+            spawnWave(FirstWaveSize, FirstWaveLength);
             respawnOnce = false;
             FirstWaveDone = true;
         }
 
-        if(aliveRobots.Count == 0 && FirstWaveDone && respawnOnce){
-            spawnWave(ThirdWaveSize, ThirdWaveLength);
+        if(FirstWaveDone && respawnOnce && !SecondWaveDone){
+            spawnWave(SecondWaveSize, SecondWaveLength);
             respawnOnce = false;
             SecondWaveDone = true;
         }
 
-        if(aliveRobots.Count == 0 && FirstWaveDone && SecondWaveDone && respawnOnce){
-            spawnWave(FourthWaveSize, FourthWaveLength);
+        if(SecondWaveDone && respawnOnce && !ThirdWaveDone){
+            spawnWave(ThirdWaveSize, ThirdWaveLength);
             respawnOnce = false;
             ThirdWaveDone = true;
         }
 
-        if(aliveRobots.Count == 0 && FirstWaveDone && SecondWaveDone && ThirdWaveDone && respawnOnce){
+        if(ThirdWaveDone && respawnOnce && !FourthWaveDone){
+            spawnWave(FourthWaveSize, FourthWaveLength);
             respawnOnce = false;
             FourthWaveDone = true;
+        }
+        if(FourthWaveDone && respawnOnce){
+            StopAllCoroutines();
         }
     }
 
@@ -132,10 +152,12 @@ public class RobotManager : MonoBehaviour
     }
 
     void checkRobothealth(){
-        if(aliveRobots.Count<0){
-            foreach (GameObject go in aliveRobots){
-                if(go.GetComponent<EnemyHealth>().CurrentHealth <=0){
-                    removeRobot(go);
+        
+        if(aliveRobots.Count>0){
+            for(int i = 0; i < aliveRobots.Count; i++){
+                if(aliveRobots[i].GetComponent<EnemyHealth>().CurrentHealth <=0){
+                    deadRobots.Add(aliveRobots[i]);
+                    removeRobot(aliveRobots[i]);
                 }
             }
         }

@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Temporary/Combat Arena/CombatArena.unity
     guid: 873ed4c6f7288c542ab3b3be62354838
   - enabled: 0
@@ -17,4 +17,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Resources/Scenes/Environment Scenes/02 Village.unity
     guid: 82611d2063a7c884f84b17df4c536121
+  - enabled: 0
+    path: Assets/Resources/Scenes/Environment Scenes/01 Harbour Polish TestingOut
+      Respawn.unity
+    guid: 31af8bc2f09022b4b9fe9f752a4f22f0
   m_configObjects: {}

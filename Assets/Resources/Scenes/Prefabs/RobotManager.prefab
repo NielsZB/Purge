@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &29171274777127530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 29171274777127528}
+  - component: {fileID: 29171274777127529}
+  m_Layer: 0
+  m_Name: RobotManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &29171274777127528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29171274777127530}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 93.297676, y: 4.5977964, z: -5.321125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &29171274777127529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29171274777127530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403e73a6cf5d1114b85e030df7949e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirstWaveLength: 0
+  FirstWaveSize: 0
+  FirstWaveDone: 0
+  SecondWaveLength: 0
+  SecondWaveSize: 0
+  SecondWaveDone: 0
+  ThirdWaveLength: 0
+  ThirdWaveSize: 0
+  ThirdWaveDone: 0
+  FourthWaveLength: 0
+  FourthWaveSize: 0
+  FourthWaveDone: 0
+  robotPrefab: {fileID: 6137180279291934561, guid: fb891447320525441bce82295e6aebfe,
+    type: 3}
+  FirstRobotToSlay: {fileID: 0}
+  aliveRobots: []
+  deadRobots: []
+  Violet: {fileID: 0}
+  respawnOnce: 0

@@ -82,19 +82,19 @@ public class PlayerController : MonoBehaviour
                 return;
             int attacknumber = animatorModule.GetInteger("AttackNumber");
             movementModule.ChangeSpeeds();
-            if (animatorModule.GetCurrentAnimatorStateInfo(0).IsName("Movement"))
+            if (animatorModule.GetCurrentAnimatorStateInfo(0).IsName("Movement With Sword"))
             {
                 animatorModule.ResetTrigger("Attack");
                 animatorModule.SetTrigger("Attack");
                 animatorModule.SetInteger("AttackNumber", 1);
             }
-            else if (animatorModule.GetCurrentAnimatorStateInfo(0).IsName("Attack_1"))
+            else if (animatorModule.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
             {
                 animatorModule.ResetTrigger("Attack");
                 animatorModule.SetTrigger("Attack");
                 animatorModule.SetInteger("AttackNumber", 2);
             }
-            else if (animatorModule.GetCurrentAnimatorStateInfo(0).IsName("Attack_2"))
+            else if (animatorModule.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
             {
                 animatorModule.ResetTrigger("Attack");
                 animatorModule.SetTrigger("Attack");
@@ -110,12 +110,12 @@ public class PlayerController : MonoBehaviour
                     return;
                 }
                 attackingModule.Unsheathe();
-                animatorModule.SetBool("Sheathed", false);
+                animatorModule.SetBool("Drawn", true);
             }
             else
             {
                 attackingModule.Sheathe();
-                animatorModule.SetBool("Sheathed", true);
+                animatorModule.SetBool("Drawn", false);
             }
         }
     }

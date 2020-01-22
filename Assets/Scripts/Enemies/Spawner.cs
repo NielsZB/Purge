@@ -4,15 +4,28 @@ using UnityEngine;
 using NaughtyAttributes;
 public class Spawner : MonoBehaviour
 {
+    public bool spawning;
     public Transform target;
     public GameObject prefab;
     public Transform[] spawnPoints;
-    [MinMaxSlider(0f, 10f)] public Vector2 waitTimeRange;
+    [MinMaxSlider(5f, 20f)] public Vector2 waitTimeRange;
     private void Start()
     {
-        StartCoroutine(SpawnTimer());
+        if (spawning)
+        {
+            StartCoroutine(SpawnTimer());
+        }
     }
 
+    public void StartSpawning()
+    {
+        if (spawning)
+        {
+            StartCoroutine(SpawnTimer());
+            spawning = true;
+        }
+
+    }
     IEnumerator SpawnTimer()
     {
         while (true)
@@ -30,5 +43,10 @@ public class Spawner : MonoBehaviour
 
             waitTimeRange.y = Mathf.Clamp(waitTimeRange.y - 0.5f, 1f, 10f);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        StartSpawning();
     }
 }
