@@ -12,7 +12,6 @@ public class RobotBehavior : MonoBehaviour
     public bool TrackingWhileAttacking { get; private set; }
     public bool HasTarget { get { return target != null; } }
 
-
     bool inRangeOfTarget
     {
         get
@@ -44,7 +43,9 @@ public class RobotBehavior : MonoBehaviour
     NavMeshAgent agent;
     Animator animator;
     EnemyHealth health;
+    Transform spawnpoint;
 
+    EnemyManager manager;
     private void Start()
     {
         agent = GetComponentInParent<NavMeshAgent>();
@@ -88,6 +89,10 @@ public class RobotBehavior : MonoBehaviour
     public void Activate()
     {
         IsActive = true;
+        if (manager != null)
+        {
+            manager.EnableSpawnpoint(spawnpoint);
+        }
     }
 
     public void Deactivate()
@@ -177,5 +182,15 @@ public class RobotBehavior : MonoBehaviour
         }
         IsWaiting = false;
         IsAttacking = false;
+    }
+
+    public void InitializeRobot(EnemyManager manager)
+    {
+        this.manager = manager;
+    }
+
+    public void SetSpawnpoint(Transform point)
+    {
+        spawnpoint = point;
     }
 }
