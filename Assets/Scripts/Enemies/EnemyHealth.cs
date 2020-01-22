@@ -16,6 +16,8 @@ public class EnemyHealth : MonoBehaviour
     Animator animator;
     NavMeshAgent agent;
 
+    EnemyManager manager;
+
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -29,10 +31,11 @@ public class EnemyHealth : MonoBehaviour
         if (CurrentHealth < 0)
         {
             IsAlive = false;
+            agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
             GetComponentInChildren <RobotBehavior>().enabled = false;
-            agent.enabled = false;
             animator.SetTrigger("Killed");
+            manager.RemoveRobot();
         }
     }
 
@@ -54,5 +57,8 @@ public class EnemyHealth : MonoBehaviour
         IsStunned = false;
     }
 
-
+    public void InitializeRobot(EnemyManager manager)
+    {
+        this.manager = manager;
+    }
 }

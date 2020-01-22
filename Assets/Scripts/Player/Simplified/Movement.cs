@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float checkYOffset = 0;
     [SerializeField] float checkDistance = 0.6f;
 
+    [SerializeField, Range(0f, 1f)] float normalToUp = 0.5f;
     Rigidbody rb;
     Transform cameraTransform;
     Targeting targeting;
@@ -41,11 +42,13 @@ public class Movement : MonoBehaviour
 
     Vector3 combinedGroundPosition;
     Vector3 updatedGroundPosition;
+
+    Vector3 prevUp;
     bool grounded;
 
-    bool movable = true;
+    public bool movable { get; private set; } = true;
 
-    public float actualMovementSpeedNormalized { get; private set; }
+    public float SmoothedMovementSpeed { get; private set; }
 
     private void SetupRigidbody()
     {
@@ -68,11 +71,18 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        Vector3 correctedVertical = input.y * cameraTransform.forward;
-        Vector3 correctedHorizontal = input.x * cameraTransform.right;
+        Vector3 localUp = Vector3.Lerp(GroundNormal(), Vector3.up, normalToUp);
+        Vector3 LocalUpSmoothed = Vector3.Lerp(transform.up, localUp, Time.deltaTime * 3f);
 
-        direction = (correctedVertical + correctedHorizontal).normalized;
-        direction.y = 0;
+        Vector3 localForward = cameraTransform.forward;
+        Vector3 localSide = cameraTransform.right;
+
+        localForward = Vector3.ProjectOnPlane(localForward, LocalUpSmoothed);
+        localSide = Vector3.ProjectOnPlane(localSide, LocalUpSmoothed);
+
+        direction = localForward * input.y + localSide * input.x;
+
+        //direction.y = 0;
 
         if (targeting.HasTarget)
         {
@@ -101,24 +111,35 @@ public class Movement : MonoBehaviour
         }
     }
 
+    float clampedMovementSpeed;
     private void FixedUpdate()
     {
         grounded = GroundCheck();
+
+
 
         if (!grounded)
         {
             gravity += Physics.gravity * Time.deltaTime;
         }
 
-        rb.velocity = (direction * movementSpeed * inputAmount) + gravity;
-        updatedGroundPosition.Set(rb.position.x, CalculateAverageGroundPoint().y, rb.position.z);
+        if (Physics.Raycast(transform.position + (Vector3.up * (checkYOffset + 0.5f)), transform.forward * 0.33f, checkDistance, groundMask))
+        {
+            clampedMovementSpeed = 0;
+        }
+        else
+        {
+            rb.velocity = (direction * movementSpeed * inputAmount) + gravity;
+            updatedGroundPosition.Set(rb.position.x, CalculateAverageGroundPoint().y, rb.position.z);
+            clampedMovementSpeed = rb.velocity.magnitude.Remap01(0, movementSpeed - 3f).Clamped01();
+        }
 
+        SmoothedMovementSpeed = Mathf.SmoothStep(SmoothedMovementSpeed, clampedMovementSpeed, 0.33f);
         if (grounded && updatedGroundPosition != rb.position)
         {
             rb.MovePosition(updatedGroundPosition);
             gravity = Vector3.zero;
         }
-        actualMovementSpeedNormalized = rb.velocity.magnitude.Remap01(0, movementSpeed).Clamped01();
     }
 
     private bool GroundCheck()
@@ -126,6 +147,17 @@ public class Movement : MonoBehaviour
         return Physics.Raycast(transform.position + (Vector3.up * checkYOffset), Vector3.down, checkDistance, groundMask);
     }
 
+    private Vector3 GroundNormal()
+    {
+        if (Physics.Raycast(transform.position + (Vector3.up * checkYOffset), Vector3.down, out RaycastHit hit, checkDistance, groundMask))
+        {
+            return hit.normal;
+        }
+        else
+        {
+            return Vector3.up;
+        }
+    }
 
     private bool GroundCheck(float xOffset, float zOffset, out Vector3 groundPoint)
     {

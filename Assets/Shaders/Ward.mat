@@ -19,19 +19,19 @@ Material:
     MotionVector: User
     RenderType: Transparent
   disabledShaderPasses:
-  - MOTIONVECTORS
   - TransparentBackface
+  - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - Vector1_182F92AE: 0.01
-    - Vector1_26DA4C80: -0.47
-    - Vector1_378599A8: 0.5
-    - Vector1_77DE1906: 12.12
+    - Vector1_182F92AE: -0.09
+    - Vector1_26DA4C80: -1
+    - Vector1_378599A8: 2.91
+    - Vector1_77DE1906: 3.53
     - Vector1_A9865108: 0
-    - Vector1_D3C1C71B: 0.03
-    - Vector1_D5A164D5: -1
+    - Vector1_D3C1C71B: -1
+    - Vector1_D5A164D5: 1
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 10
@@ -42,6 +42,8 @@ Material:
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
+    - _EmissionFresnelPower: 5
+    - _FresnelAlpha: 15
     - _ReceivesSSR: 0
     - _RenderQueueType: 5
     - _RequireSplitLighting: 0
@@ -68,4 +70,4 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissiveColor: {r: 95.87451, g: 45.678432, b: 32.125492, a: 1}
+    - _EmissiveColor: {r: 0.00390625, g: 0.0015931427, b: 0.0007965714, a: 1}

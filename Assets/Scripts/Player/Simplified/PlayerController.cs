@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
         // Movement and Dodge
         movementModule.Move(movementInput, Input.GetButtonDown(dash));
-        animatorModule.SetFloat("Movement", movementModule.actualMovementSpeedNormalized);
+        animatorModule.SetFloat("Movement", movementModule.SmoothedMovementSpeed);
 
         // Shield, Dash, Attack and Sheathe sword.
         if (Input.GetButtonDown(ward))
@@ -73,8 +73,11 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetButtonDown(dash))
         {
-            animatorModule.ResetTrigger("Dash");
-            animatorModule.SetTrigger("Dash");
+            if (!movementModule.movable)
+            {
+                animatorModule.ResetTrigger("Dash");
+                animatorModule.SetTrigger("Dash");
+            }
         }
         else if (Input.GetButtonDown(attack))
         {

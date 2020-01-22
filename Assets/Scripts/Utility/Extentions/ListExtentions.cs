@@ -49,5 +49,24 @@ public static class ListExtentions
         }
 
         return item;
+
+    }
+
+    public static int GetRandom<T>(this IList<T> list, out T randomItem, bool remove = false)
+    {
+        if (list.Count == 0)
+            throw new IndexOutOfRangeException("Can't select a random item from an empty list");
+
+        int index = UnityEngine.Random.Range(0, list.Count);
+        T item = list[index];
+
+
+        if (remove)
+        {
+            list.RemoveAt(index);
+        }
+
+        randomItem = item;
+        return index;
     }
 }
