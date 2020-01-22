@@ -126,13 +126,14 @@ public class Movement : MonoBehaviour
         if (Physics.Raycast(transform.position + (Vector3.up * (checkYOffset + 0.5f)), transform.forward * 0.33f, checkDistance, groundMask))
         {
             clampedMovementSpeed = 0;
+            rb.velocity = Vector3.zero;
         }
         else
         {
             rb.velocity = (direction * movementSpeed * inputAmount) + gravity;
-            updatedGroundPosition.Set(rb.position.x, CalculateAverageGroundPoint().y, rb.position.z);
             clampedMovementSpeed = rb.velocity.magnitude.Remap01(0, movementSpeed - 3f).Clamped01();
         }
+        updatedGroundPosition.Set(rb.position.x, CalculateAverageGroundPoint().y, rb.position.z);
 
         SmoothedMovementSpeed = Mathf.SmoothStep(SmoothedMovementSpeed, clampedMovementSpeed, 0.33f);
         if (grounded && updatedGroundPosition != rb.position)
