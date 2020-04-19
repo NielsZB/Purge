@@ -812,6 +812,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: {fileID: 11400000, guid: 469cfe628d5977348ae06e30e8d3affc, type: 2}
   health: 40
+  hitGradient:
+    serializedVersion: 2
+    key0: {r: 0, g: 0, b: 0, a: 1}
+    key1: {r: 0.42352942, g: 0.19270588, b: 0.19270588, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 15420
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  render: {fileID: 7348890604485416725}
 --- !u!114 &2635722654939459739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1096,7 +1126,7 @@ MonoBehaviour:
   attackRotationSpeed: 10
   groundMask:
     serializedVersion: 2
-    m_Bits: 2147483649
+    m_Bits: 2148016129
   checkSpacing: 0.25
   checkYOffset: 0.5
   checkDistance: 0.6
@@ -1228,7 +1258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wardRange: 4
   wardForce: 500
-  wardUpForce: 10
+  wardUpForce: 20
   torqueForce: 0.2
   angularDragOverTime: 10
   maxDrag: 20
@@ -1855,13 +1885,13 @@ GameObject:
   - component: {fileID: 8649819717215185521}
   - component: {fileID: 8649819717215185522}
   - component: {fileID: 8649819717215185523}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Ward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8649819717215185532
 Transform:
   m_ObjectHideFlags: 0

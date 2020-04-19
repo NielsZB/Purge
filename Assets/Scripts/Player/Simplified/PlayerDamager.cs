@@ -21,12 +21,12 @@ public class PlayerDamager : MonoBehaviour
             {
                 if(swordAttack)
                 {
-                health.TakeDamage(attackingModule.Damage);
+                health.TakeDamage(attackingModule.Damage,transform.root);
                 attackingModule.GainHeat();
                 }
                 else
                 {
-                    health.TakeDamage(attackingModule.StandardDamage);
+                    health.TakeDamage(attackingModule.StandardDamage, transform.root);
 
                 }
             }

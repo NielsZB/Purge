@@ -28,7 +28,7 @@ public class Damager : MonoBehaviour
                     if (enemyHealth == ownHealth)
                         return;
 
-                    enemyHealth.TakeDamage(damage / 4);
+                    enemyHealth.TakeDamage(damage / 7.5f);
                 }
 
                 enemyHealth.TakeDamage(damage);

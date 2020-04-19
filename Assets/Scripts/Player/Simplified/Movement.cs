@@ -111,7 +111,6 @@ public class Movement : MonoBehaviour
         }
     }
 
-    float clampedMovementSpeed;
     private void FixedUpdate()
     {
         grounded = GroundCheck();
@@ -123,19 +122,12 @@ public class Movement : MonoBehaviour
             gravity += Physics.gravity * Time.deltaTime;
         }
 
-        if (Physics.Raycast(transform.position + (Vector3.up * (checkYOffset + 0.5f)), transform.forward * 0.33f, checkDistance, groundMask))
-        {
-            clampedMovementSpeed = 0;
-            rb.velocity = Vector3.zero;
-        }
-        else
-        {
-            rb.velocity = (direction * movementSpeed * inputAmount) + gravity;
-            clampedMovementSpeed = rb.velocity.magnitude.Remap01(0, movementSpeed - 3f).Clamped01();
-        }
+
+        rb.velocity = (direction * movementSpeed * inputAmount) + gravity;
+        
         updatedGroundPosition.Set(rb.position.x, CalculateAverageGroundPoint().y, rb.position.z);
 
-        SmoothedMovementSpeed = Mathf.SmoothStep(SmoothedMovementSpeed, clampedMovementSpeed, 0.33f);
+        SmoothedMovementSpeed = rb.velocity.magnitude.Remap01(0, movementSpeed - 3f).Clamped01();
         if (grounded && updatedGroundPosition != rb.position)
         {
             rb.MovePosition(updatedGroundPosition);
@@ -150,7 +142,7 @@ public class Movement : MonoBehaviour
 
     private Vector3 GroundNormal()
     {
-        if (Physics.Raycast(transform.position + (Vector3.up * checkYOffset), Vector3.down, out RaycastHit hit, checkDistance, groundMask))
+        if (Physics.Raycast(transform.position + (Vector3.up * checkYOffset), Vector3.down, out RaycastHit hit, checkDistance, groundMask) && Vector3.Dot(Vector3.up, hit.normal) > 0.2f)
         {
             return hit.normal;
         }
@@ -262,6 +254,8 @@ public class Movement : MonoBehaviour
     {
         movable = false;
         input = Vector2.zero;
+        rb.velocity = Vector3.zero;
+        rb.isKinematic = true;
     }
 
     public void ChangeSpeeds()

@@ -12,7 +12,7 @@ Material:
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap:
@@ -107,8 +107,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_1D9D62C: 0.79
-    - Vector1_33A50FC4: 0.25
+    - Vector1_1D9D62C: 100
+    - Vector1_33A50FC4: 0.2
     - Vector1_A00CD812: 0
     - _AORemapMax: 1
     - _AORemapMin: 0
@@ -176,6 +176,8 @@ Material:
     - _Ior: 1
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
+    - _JitterShift: 0.1
+    - _JitterSize: 0.3
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
     - _Metallic: 0
@@ -233,7 +235,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_24E6A1B5: {r: 0.24528286, g: 0.23209316, b: 0.22330007, a: 1}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 0.9691824, b: 0.7688679, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}

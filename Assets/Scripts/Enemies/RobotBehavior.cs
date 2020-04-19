@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class RobotBehavior : MonoBehaviour
 {
     public bool IsActive { get; private set; }
@@ -44,7 +45,6 @@ public class RobotBehavior : MonoBehaviour
     Animator animator;
     EnemyHealth health;
     Transform spawnpoint;
-
     EnemyManager manager;
     private void Start()
     {

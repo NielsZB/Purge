@@ -8,14 +8,14 @@ public struct Wave
 {
     public int count;
     public float duration;
+    public float breakDuration;
 }
 public class EnemyManager : MonoBehaviour
 {
-
+    [SerializeField] CombatManager combatManager;
     [SerializeField] Transform target;
     [SerializeField] GameObject prefab = null;
-    [SerializeField, ReorderableList] Wave[] waves;
-
+    [SerializeField] Wave[] waves;
     int waveIndex;
 
     Transform[] spawnpoint = null;
@@ -26,11 +26,6 @@ public class EnemyManager : MonoBehaviour
     int numberEnabledSpawnpoints;
     WaitForSecondsRealtime CombatEncounterForSeconds = new WaitForSecondsRealtime(1f);
     WaitForSecondsRealtime SpawnWaveForSeconds = new WaitForSecondsRealtime(5f);
-
-    private void Start()
-    {
-        TriggerEncounter();
-    }
 
     public void TriggerEncounter()
     {
@@ -98,12 +93,35 @@ public class EnemyManager : MonoBehaviour
             t += Time.deltaTime / duration;
             yield return null;
         }
-        waveInProgress = false;
+
+        if (waves[waveIndex].duration == 0)
+        {
+            waveInProgress = false;
+        }
+        else
+        {
+            StartCoroutine(Break());
+        }
 
         if (waveIndex < waves.Length)
         {
+
             waveIndex++;
         }
+    }
+
+    IEnumerator Break()
+    {
+        float t = 0;
+        int index = waveIndex;
+        while(t < 1)
+        {
+            t += Time.deltaTime / waves[index].duration;
+
+            yield return null;
+        }
+
+        waveInProgress = false;
     }
     IEnumerator DelayRobotSpawn(Transform point)
     {
@@ -126,6 +144,8 @@ public class EnemyManager : MonoBehaviour
 
     public void AddRobot(GameObject robotGameObject, Transform point)
     {
+        combatManager.AddEntity(robotGameObject);
+
         RobotBehavior behavior = robotGameObject.GetComponentInChildren<RobotBehavior>();
         behavior.SetTarget(target);
         behavior.SetSpawnpoint(point);
